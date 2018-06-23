@@ -90,24 +90,31 @@
                       </tr>
                     </thead>
                     <tbody>
+                    <c:forEach var="cliente" items="${clientes}">
                       <tr>
                       
-                        <td>Cedula</td>
-                        <td>1090482366</td>
-                        <td>Jorge Alexander</td>
-                        <td>Maldonado Perez</td>
-                        <td>Avenida 22 # 21-20</td>
+                        <td>${cliente.tipoDoc}</td>
+		                 <td>${cliente.numeroDocumento}</td>
+		                 <td>${cliente.nombre}</td>
+		                 <td>${cliente.apellido}</td>
+                         <td>${cliente.direccion}</td>
                       
-                        <td>
-
-                          <button type="button" class="btn btn-success"><i class="fa fa-pencil"></i>&nbsp;</button>
-                         <button type="button" class="btn btn-danger"><i class="fa fa-trash-o"></i>&nbsp;</button>
-
-                        </td>
+                          <td>
+									<a href="${contextPath}/actualizarCategoria?id=${cliente.codigo}">
+		                          		<button type="button" class="btn btn-success">
+		                          			<i class="fa fa-pencil"></i>&nbsp;
+		                          		</button>
+		                         	</a>
+		                         	<a href="${contextPath}/actualizarCategoria?id=${cliente.codigo}">
+		                         		<button type="button" class="btn btn-danger">
+		                         			<i class="fa fa-trash-o"></i>&nbsp;
+		                         		</button>
+									</a>
+		                        </td>
 
                         
                       </tr>
-                     
+                     </c:forEach>
                      
                      
                     </tbody>
@@ -124,7 +131,7 @@
 
 
     </div><!-- /#right-panel -->
-
+	<%@ include file="RegistrarCliente.jsp" %>
 
     
  
