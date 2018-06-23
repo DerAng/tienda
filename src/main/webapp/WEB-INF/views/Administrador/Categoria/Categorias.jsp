@@ -83,29 +83,34 @@
                         <th>Descripcion</th>
                         <th>Accion</th>
                         
-                        
-
-                     
                       </tr>
                     </thead>
                     <tbody>
+                    <c:forEach var="categoria" items="${categorias}">
                       <tr>
-                        <td>02280</td>
-                        <td>Lacteos</td>
-                        <td>Los lácteos son productos altamente perecederos..</td>
+                        <td>${categoria.codigo}</td>
+		                <td>${categoria.nombre}</td>
+		                <td>${categoria.descripcion}</td>
+		                
+		               
                         
-                        <td>
-
-                          <button type="button" class="btn btn-success"><i class="fa fa-pencil"></i>&nbsp;</button>
-                         
-                         <button type="button" class="btn btn-danger"><i class="fa fa-trash-o"></i>&nbsp;</button>
-
-                        </td>
+                         <td>
+									<a href="${contextPath}/actualizarCategoria?id=${categoria.codigo}">
+		                          		<button type="button" class="btn btn-success">
+		                          			<i class="fa fa-pencil"></i>&nbsp;
+		                          		</button>
+		                         	</a>
+		                         	<a href="${contextPath}/actualizarCategoria?id=${categoria.codigo}">
+		                         		<button type="button" class="btn btn-danger">
+		                         			<i class="fa fa-trash-o"></i>&nbsp;
+		                         		</button>
+									</a>
+		                        </td>
 
                         
                       </tr>
                      
-                     
+                     </c:forEach>
                      
                     </tbody>
                   </table>
@@ -122,7 +127,7 @@
 
     </div><!-- /#right-panel -->
 
-
+<%@ include file="RegistrarCategoria.jsp" %>
     
  
 <%@ include file="../General/Scripts.jsp"%>
