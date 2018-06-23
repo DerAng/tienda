@@ -48,7 +48,7 @@ public class SpringDbMgr {
 		p.setProperty("password", "");
 		p.setProperty("driverClassName", "com.mysql.jdbc.Driver");
 
-		dataSource = new DriverManagerDataSource("jdbc:mysql://localhost:3306/tienda", p);
+		dataSource = new DriverManagerDataSource("jdbc:mysql://localhost:3306/tienda?useUnicode=true&amp;characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=false&serverTimezone=UTC", p);
 		//jdbc:mysql://localhost:3306/dbname
 	}
 
