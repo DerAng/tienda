@@ -50,8 +50,4 @@ public class TiendaDao {
 		
 		return tiendas;
 	}
-	
-	
-	
-
 }

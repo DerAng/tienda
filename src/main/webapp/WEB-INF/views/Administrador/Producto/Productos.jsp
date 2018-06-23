@@ -79,7 +79,6 @@
                       <tr>
                       
                         <th>Proveedor</th>
-                        <th>Codigo Producto</th>
                         <th>Nombre Producto </th>
                         <th>Categoria</th>
                         <th>Stock</th>
@@ -90,28 +89,32 @@
                       </tr>
                     </thead>
                     <tbody>
-                      <tr>
-                       
-                       
-                        <td>Juan Esteban</td>
-                        <td>126488</td>
-                        <td>Yogurt Alpina</td>
-                        <td>Lacteos</td>
-                        <td>10</td>
-                        
-                        
-                        <td>
-
-                          <button type="button" class="btn btn-success"><i class="fa fa-pencil"></i>&nbsp;</button>
-                         
-                         <button type="button" class="btn btn-danger"><i class="fa fa-trash-o"></i>&nbsp;</button>
-
-                        </td>
-
-                        
-                      </tr>
-                     
-                     
+                    
+                    
+                    	<c:forEach var="producto" items="${productos}">
+		                      <tr>
+		                        <td>${producto.nombreProveedor}</td>
+		                        <td>${producto.nombre}</td>
+		                        <td>${producto.nombreCategoria}</td>
+		                        <td>${producto.stock}</td>
+		                        
+		                        
+		                        <td>
+									<a href="${contextPath}/actualizarProducto?id=${producto.codigo}">
+		                          		<button type="button" class="btn btn-success">
+		                          			<i class="fa fa-pencil"></i>&nbsp;
+		                          		</button>
+		                         	</a>
+		                         	<a href="${contextPath}/actualizarProducto?id=${producto.codigo}">
+		                         		<button type="button" class="btn btn-danger">
+		                         			<i class="fa fa-trash-o"></i>&nbsp;
+		                         		</button>
+									</a>
+		                        </td>
+				                    
+		                      </tr>
+                     	</c:forEach>                    
+                    
                      
                     </tbody>
                   </table>
@@ -128,7 +131,7 @@
 
     </div><!-- /#right-panel -->
 
-
+	<%@ include file="RegistrarProducto.jsp" %>
     
  
 <%@ include file="../General/Scripts.jsp"%>
