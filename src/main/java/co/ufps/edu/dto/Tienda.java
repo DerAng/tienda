@@ -15,17 +15,6 @@ public class Tienda {
 	public Tienda(){
 		
 	}
-	
-	public Tienda(int codigo, int nit, String nombre, int administrador, String direccion, String nombreRepresentante) {
-		super();
-		this.codigo = codigo;
-		this.nit = nit;
-		this.nombre = nombre;
-		this.administrador = administrador;
-		this.direccion = direccion;
-		this.nombreRepresentante = nombreRepresentante;
-	}
-
 
 	public int getCodigo() {
 		return codigo;
@@ -87,8 +76,11 @@ public class Tienda {
 	}
 	
 	public boolean validarDatos(){
-		return (StringUtils.isEmpty(this.nombre) && StringUtils.isEmpty(this.direccion) && StringUtils.isEmpty(this.nombreRepresentante)
-				&& this.nit > 0 && this.administrador > 0);
+		return (!StringUtils.isEmpty(this.nombre) 
+		      && !StringUtils.isEmpty(this.direccion) 
+		      && !StringUtils.isEmpty(this.nombreRepresentante)
+		      && this.nit > 0 
+		      && this.administrador > 0);
 	}
 
 	public String getNombreAdministrador() {
