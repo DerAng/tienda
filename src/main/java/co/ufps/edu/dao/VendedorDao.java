@@ -1,9 +1,12 @@
 package co.ufps.edu.dao;
 
+import java.util.ArrayList;
+import java.util.List;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 
 import co.ufps.edu.bd.SpringDbMgr;
+import co.ufps.edu.dto.Producto;
 import co.ufps.edu.dto.Vendedor;
 
 public class VendedorDao {
@@ -35,21 +38,38 @@ public class VendedorDao {
 
 		return (result == 1);
 	}
-	
-	
-/*
-	private boolean esCodigoRepetido(int codigo, SpringDbMgr springDbMgr) {
-		MapSqlParameterSource mapSqlParameterSource = new MapSqlParameterSource();
-		mapSqlParameterSource.addValue("code", Integer.parseInt(codigo));
-		SqlRowSet sqlRowSet = springDbMgr.executeQuery("select codigo from estudiante where codigo = :code",
-				mapSqlParameterSource);
-		return (sqlRowSet.next());
-	}
-	
-	*/
 
-	
-	
-	
+  public List<Vendedor> getVendedores() {
+    List<Vendedor> vendedores = new ArrayList<>();
+    
+    SqlRowSet sqlRowSet = springDbMgr.executeQuery("select      vendedor.codigo             codigo, "
+                                                 + "            vendedor.nombre             nombre, "
+                                                 + "            vendedor.apellido           apellido, "
+                                                 + "            vendedor.direccion          direccion, "
+                                                 + "            vendedor.telefono           telefono, "
+                                                 + "            vendedor.fechaNacimiento    fechaNacimiento "
+                                                 
+                                                 + "from        vendedor "
+                                                 + "ORDER BY    vendedor.codigo desc");
+    
+    while(sqlRowSet.next()){
+        // Creamos la tienda
+        Vendedor vendedor = new Vendedor();
+        
+        // Llenamos el objeto de datos
+        vendedor.setCodigo(sqlRowSet.getInt("codigo"));
+        vendedor.setNombre(sqlRowSet.getString("nombre"));
+        vendedor.setApellido(sqlRowSet.getString("apellido"));
+        vendedor.setDireccion(sqlRowSet.getString("direccion"));
+        vendedor.setTelefono(sqlRowSet.getString("telefono"));
+        vendedor.setFechaNacimiento(sqlRowSet.getDate("fechaNacimiento"));
+
+        // Guardamos la 
+        vendedores.add(vendedor);
+    }
+    
+    
+    return vendedores;
+  }	
 
 }

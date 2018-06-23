@@ -13,7 +13,6 @@ public class Vendedor {
 	private Date fechaIngreso;
 	private int nombreTienda;
 	
-	
 	public Vendedor(){
 		
 	}
