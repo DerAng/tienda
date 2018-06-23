@@ -9,14 +9,6 @@
 			
 			<form:form id="formTienda" action="guardarTienda" method="post" class="form-horizontal" modelAttribute="tienda">
 	        	<div class="modal-body">
-								<c:if test="${not empty wrong}">		            
-		                        	<div class="sufee-alert alert with-close alert-danger alert-dismissible fade show">				                   	
-				                    		<c:out value='${wrong}' />
-				                    	<button type="button" class="close" data-dismiss="alert" aria-label="Close">
-											<span aria-hidden="true">&times;</span>
-				                    	</button>
-				                   </div>
-							    </c:if>
 						<div class="row form-group">
 			 				<div class="col col-md-3">
 			 					<label for="email-input" class=" form-control-label">NIT</label>
