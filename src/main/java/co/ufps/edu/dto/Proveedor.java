@@ -1,5 +1,7 @@
 package co.ufps.edu.dto;
 
+import org.springframework.util.StringUtils;
+
 public class Proveedor {
 	
 	private int codigo;
@@ -101,7 +103,16 @@ public class Proveedor {
 	}
 	
 	
-	
+	public boolean validarDatos(){
+		return (!StringUtils.isEmpty(this.nomEmpresa) 
+		      && !StringUtils.isEmpty(this.nombreContacto) 
+		      && !StringUtils.isEmpty(this.telefono)
+		      && !StringUtils.isEmpty(this.correoElectronico)
+		      && !StringUtils.isEmpty(this.formaPago)
+		     
+		      && this.nit_Empresa > 0) ;
+		     
+	}
 	
 	
 	

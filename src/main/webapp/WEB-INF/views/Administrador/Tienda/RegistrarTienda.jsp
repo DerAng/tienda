@@ -10,6 +10,7 @@
 			<form:form id="formTienda" action="guardarTienda" method="post" class="form-horizontal" modelAttribute="tienda">
 	        	<div class="modal-body">
 						<div class="row form-group">
+						
 			 				<div class="col col-md-3">
 			 					<label for="email-input" class=" form-control-label">NIT</label>
 			 				</div>

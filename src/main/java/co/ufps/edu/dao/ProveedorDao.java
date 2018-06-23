@@ -3,6 +3,7 @@ package co.ufps.edu.dao;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 
 import co.ufps.edu.bd.SpringDbMgr;
@@ -51,5 +52,34 @@ public class ProveedorDao {
 		
 		return proveedores;
 	}
+	
+	
+	public String registrarProveedor(Proveedor proveedor) {
+	    // Agrego los datos del registro (nombreColumna/Valor)
+
+	    MapSqlParameterSource map = new MapSqlParameterSource();
+	    map.addValue("nit_Empresa", proveedor.getNit_Empresa());
+	    map.addValue("nomEmpresa", proveedor.getNomEmpresa());
+	    map.addValue("nombreContacto", proveedor.getNombreContacto());
+	    map.addValue("telefono", proveedor.getTelefono());
+	    map.addValue("correoElectronico", proveedor.getCorreoElectronico());
+	    map.addValue("formaPago", proveedor.getFormaPago());
+
+	    // Armar la sentencia de actualización debase de datos
+	    String query =
+	        "INSERT INTO proveedor(nit_Empresa,nomEmpresa,nombreContacto,telefono,correoElectronico,formaPago) VALUES(:nit_Empresa,:nomEmpresa,:nombreContacto,:telefono,:correoElectronico,:formaPago)";
+
+	    // Ejecutar la sentencia
+	    int result = 0;
+	    try {
+	      result = springDbMgr.executeDml(query, map);
+	    } catch (Exception e) {
+	      e.printStackTrace();
+	    }
+	    // Si hubieron filas afectadas es por que si hubo registro, en caso contrario muestra el mensaje
+	    // de error.
+	    return (result == 1) ? "Registro exitoso"
+	        : "El proveedor no pudo ser registrado. Contacte al administrador";
+	  }
 
 }

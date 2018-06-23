@@ -7,44 +7,65 @@
                                
                                 
                             </div>
+                            
+                            <form:form id="formProveedor" action="guardarProveedor" method="post" class="form-horizontal" modelAttribute="proveedor">
                             <div class="modal-body">
 
-                                <form action="" method="post" enctype="multipart/form-data" class="form-horizontal">
-
-                              
-                                 
 
                                 <div class="row form-group">
-                                        <div class="col col-md-3"><label for="email-input" class=" form-control-label">NIT Empresa</label></div>
-                                             <div class="col-12 col-md-9"><input type="email" id="email-input" name="email-input" placeholder="35678923" class="form-control">
+                                        <div class="col col-md-3">
+                                        	<label for="email-input" class=" form-control-label">NIT Empresa</label>
+                                        </div>
+                                         <div class="col-12 col-md-9">
+                                         	
+                                         	<form:input id="nit_Empresa" path="nit_Empresa" class="form-control" placeholder="35678923" aria-invalid="false" required = "true"/>
                                         </div>
                                 </div>
 
                             
                                   <div class="row form-group">
-                                    <div class="col col-md-3"><label for="email-input" class=" form-control-label">Nombre Empresa</label></div>
-                                    <div class="col-12 col-md-9"><input type="email" id="email-input" name="email-input" placeholder="Colanta" class="form-control"></div>
+                                    <div class="col col-md-3">
+                                    	<label for="email-input" class=" form-control-label">Nombre Empresa</label>
+                                    </div>
+                                    <div class="col-12 col-md-9">
+                                    	
+                                    	<form:input id="nomEmpresa" path="nomEmpresa" class="form-control" placeholder="Colanta" aria-invalid="false" required = "true"/>
+                                    </div>
+                                    
                                   </div>
 
 
 
                                   <div class="row form-group">
-                                    <div class="col col-md-3"><label for="email-input" class=" form-control-label">Nombre del Contacto</label></div>
-                                    <div class="col-12 col-md-9"><input type="email" id="email-input" name="email-input" placeholder="Juan Luis" class="form-control"></div>
+                                    <div class="col col-md-3">
+                                    	<label for="email-input" class=" form-control-label">Nombre del Contacto</label>
+                                    </div>
+                                    <div class="col-12 col-md-9">
+                                    	
+                                    	<form:input id="nombreContacto" path="nombreContacto" class="form-control" placeholder="Juan Luis" aria-invalid="false" required = "true"/>
+                                    	
+                                    </div>
                                 </div>
                                   
 
 
                                 <div class="row form-group">
-                                    <div class="col col-md-3"><label for="email-input" class=" form-control-label">Telefono</label></div>
-                                    <div class="col-12 col-md-9"><input type="email" id="email-input" name="email-input" placeholder="5825053" class="form-control">
+                                    <div class="col col-md-3">
+                                    	<label for="email-input" class=" form-control-label">Telefono</label>
+                                    </div>
+                                    <div class="col-12 col-md-9">
+                                    	
+                                    	<form:input id="telefono" path="telefono" class="form-control" placeholder="5825053" aria-invalid="false" required = "true"/>
                                     </div>
                                 </div>
 
 
                                  <div class="row form-group">
-                                    <div class="col col-md-3"><label for="email-input" class=" form-control-label">Correo Electronico</label></div>
-                                    <div class="col-12 col-md-9"><input type="email" id="email-input" name="email-input" placeholder="JuanLuis@gmail.com" class="form-control">
+                                    <div class="col col-md-3">
+                                    	<label for="email-input" class=" form-control-label">Correo Electronico</label></div>
+                                    <div class="col-12 col-md-9">
+                                    	
+                                    	<form:input id="correoElectronico" path="correoElectronico" class="form-control" placeholder="JuanLuis@gmail.com" aria-invalid="false" required = "true"/>
                                     </div>
                                 </div>
 
@@ -53,27 +74,26 @@
                                 <div class="row form-group">
                                     <div class="col col-md-3"><label for="select" class=" form-control-label">Forma de Pago</label></div>
                                     <div class="col-12 col-md-9">
-                                      <select name="select" id="select" class="form-control">
-                                        <option value="0"></option>
-                                        <option value="1">Efectivo</option>
-                                        <option value="2">Cheque</option>
+                                     
+                                       <form:select path="formaPago" id="formaPago" class="form-control">
+                                        <option value="0">Efectivo</option>
+                                        <option value="1">Cheque</option>
                                         <option value="2">Credito</option>
+                                       
                                         
-                                      </select>
+                                       </form:select>
                                     </div>
                                  </div>
 
 
-
-                                
-                                </form>
-
+                           
 
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                                <button type="button" class="btn btn-primary">Registrar</button>
+                                <button type="submit" class="btn btn-primary">Registrar</button>
                             </div>
+                            </form:form> 
                         </div>
                     </div>
                 </div>
