@@ -9,7 +9,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
+import com.fasterxml.jackson.databind.ext.NioPathDeserializer;
+import co.ufps.edu.dao.AdministradorDao;
 import co.ufps.edu.dao.TiendaDao;
 import co.ufps.edu.dto.Tienda;
 
@@ -17,13 +18,16 @@ import co.ufps.edu.dto.Tienda;
 public class TiendaController {
 	
 	private TiendaDao tiendaDao;
+	private AdministradorDao administradorDao;
 	
 	public TiendaController(){
 		tiendaDao = new TiendaDao(); 
+		administradorDao = new AdministradorDao();
 	}
 	
 	@GetMapping("tiendas") // Base
 	public String index(Model model) {
+	    model.addAttribute("administradores",administradorDao.getlistaAdministradores());
 		model.addAttribute("tiendas", tiendaDao.getTiendas());
 		return "/Administrador/Tienda/Tiendas"; // Nombre del archivo jsp
 	}
@@ -32,24 +36,25 @@ public class TiendaController {
 	public Tienda setUpUserForm() {		
 		return new Tienda();
 	}
-	/*
+	
 	@PostMapping("/guardarTienda")
 	public String RegistrarEvaluador(@ModelAttribute("tienda") Tienda tienda, Model model) {
 		if (tienda.validarDatos()) {
-			logController.validarSesion(token, request);
-			evaluadorDao.registrarEvaluador(e);
-			model.addAttribute("ListaLineas", lineaDao.getLineas().values());
-			model.addAttribute("result", "registroExitoso");
-			model.addAttribute("evaluador", new Evaluador());
-			return "Administrador/RegistrarEvaluador";
-		} else {
-			logController.validarSesion(token, request);
-			model.addAttribute("wrong", "registro");
-			model.addAttribute("ListaLineas", lineaDao.getLineas().values());
-			return "Administrador/RegistrarEvaluador";
+			String mensaje = tiendaDao.registrarTienda(tienda);
+			if(mensaje.equals("Registro exitoso")) {
+    			model.addAttribute("result", "Tienda registrada con exito");
+    			model.addAttribute("tienda", new Tienda());
+    			return index(model);
+			}else {
+	           model.addAttribute("wrong", mensaje);
+	           return index(model);
+			}
+		} else {			
+			model.addAttribute("wrong", "Campos invalidos.");
+			return index(model);
 		}
 
 	}
-	*/
+	
 
 }

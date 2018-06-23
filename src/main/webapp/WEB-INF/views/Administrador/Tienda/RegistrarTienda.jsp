@@ -6,18 +6,26 @@
             <div class="modal-header">
 				<h5 class="modal-title" id="largeModalLabel">Registrar Tienda</h5>
 			</div>
-			<form action="" method="post" enctype="multipart/form-data" class="form-horizontal">
+			
+			<form:form id="formTienda" action="guardarTienda" method="post" class="form-horizontal" modelAttribute="tienda">
 	        	<div class="modal-body">
-	
 						<div class="row form-group">
-			 				<div class="col col-md-3"><label for="email-input" class=" form-control-label">NIT</label></div>
-			    			<div class="col-12 col-md-9"><input type="email" id="email-input" name="email-input" placeholder="10302900" class="form-control"></div>
+			 				<div class="col col-md-3">
+			 					<label for="email-input" class=" form-control-label">NIT</label>
+			 				</div>
+			    			<div class="col-12 col-md-9"> 
+			    				<form:input id="nit" path="nit" class="form-control" placeholder="10302900" aria-invalid="false" required = "true"/>			    				
+			    			</div>
 						</div>
 		
 		
 						 <div class="row form-group">
-						    <div class="col col-md-3"><label for="email-input" class=" form-control-label">Nombre</label></div>
-						    <div class="col-12 col-md-9"><input type="email" id="email-input" name="email-input" placeholder="Tienda la 22" class="form-control"></div>
+						    <div class="col col-md-3">
+						    	<label for="email-input" class=" form-control-label">Nombre</label>
+						    </div>
+						    <div class="col-12 col-md-9">
+						    	<form:input id="nombre" path="nombre" class="form-control" placeholder="Tienda la 22" aria-invalid="false" required = "true"/>						    
+						    </div>
 						 </div>
 		
 		
@@ -25,23 +33,30 @@
 						<div class="row form-group">
 						    <div class="col col-md-3"><label for="select" class=" form-control-label">Administrador</label></div>
 						    <div class="col-12 col-md-9">
-						      <select name="select" id="select" class="form-control">
-						        <option value="0"></option>
-						        
-						      </select>
+                        			  <form:select path="administrador" id="administrador" class="form-control">
+				                        <form:option value="0" label="Seleccione el administrador" />
+				                        <form:options items="${administradores}"/>
+				                      </form:select>  
 						    </div>
 						</div>
 		
 						<div class="row form-group">
-					    	<div class="col col-md-3"><label for="email-input" class=" form-control-label">Direccion</label></div>
-					    	<div class="col-12 col-md-9"><input type="email" id="email-input" name="email-input" placeholder="Avenida 22 # 3-18" class="form-control"></div>
+					    	<div class="col col-md-3">
+					    		<label for="email-input" class=" form-control-label">Direccion</label>
+					    	</div>
+					    	<div class="col-12 col-md-9">					    		
+					    		<form:input id="direccion" path="direccion" class="form-control" placeholder="Avenida 22 # 3-18" aria-invalid="false" required = "true"/>
+					    	</div>
 					  	</div>
 		
 		
 		            
 						<div class="row form-group">
-						    <div class="col col-md-3"><label for="email-input" class=" form-control-label">Nombre Representante</label></div>
-						    <div class="col-12 col-md-9"><input type="email" id="email-input" name="email-input" placeholder="Juan Luis" class="form-control">
+						    <div class="col col-md-3">
+						    	<label for="email-input" class=" form-control-label">Nombre Representante</label>
+						    </div>
+						    <div class="col-12 col-md-9">						 
+						    	<form:input id="nombreRepresentante" path="nombreRepresentante" class="form-control" placeholder="Juan Luis" aria-invalid="false" required = "true"/>
 						    </div>
 						</div>
 					
@@ -50,7 +65,7 @@
 					<button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
 					<button type="submit" class="btn btn-primary">Registrar</button>
 			    </div>
-		    </form>
+		    </form:form> 
         </div>
     </div>
 </div>
