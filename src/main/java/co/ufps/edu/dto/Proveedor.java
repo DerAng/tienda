@@ -10,9 +10,12 @@ public class Proveedor {
 	private String correoElectronico;
 	private String formaPago;
 
-	public Proveedor(){
-		
+	
+	public Proveedor() {
+		super();
 	}
+  
+		
 	
 	public Proveedor(int codigo,int nit_Empresa, String nomEmpresa, String nombreContacto, String telefono,
 			String correoElectronico, String formaPago) {

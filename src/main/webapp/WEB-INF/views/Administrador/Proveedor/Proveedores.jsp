@@ -80,7 +80,7 @@
                         
                         
                         <th>NIT </th>
-                        <th>Nombre Empresa</th>
+                       <th>Nombre Empresa</th>
                         <th>Nombre del Contacto</th>
                         <th>Telefono</th>
                         <th>Correo Electronico</th>
@@ -90,27 +90,36 @@
                       </tr>
                     </thead>
                     <tbody>
+                    <c:forEach var="proveedor" items="${proveedores}">
                       <tr>
                         
-                         <td>189554379</td>
-                        <td>Colanta</td>
-                        <td>Oscar Jose</td>
-                        <td>5839417</td>
-                        <td>oscar@hotmail.com</td>
+                                
+		                        <td>${proveedor.nit_Empresa}</td>
+		                        <td>${proveedor.nomEmpresa}</td>
+		                         <td>${proveedor.nombreContacto}</td>
+		                        <td>${proveedor.telefono}</td>
+		                        <td>${proveedor.correoElectronico}</td>
+		                       
                         
                         
-                        <td>
-
-                          <button type="button" class="btn btn-success"><i class="fa fa-pencil"></i>&nbsp;</button>
                          
-                         <button type="button" class="btn btn-danger"><i class="fa fa-trash-o"></i>&nbsp;</button>
-
-                        </td>
+		                        <td>
+									<a href="${contextPath}/actualizarProveedor?id=${proveedor.codigo}">
+		                          		<button type="button" class="btn btn-success">
+		                          			<i class="fa fa-pencil"></i>&nbsp;
+		                          		</button>
+		                         	</a>
+		                         	<a href="${contextPath}/actualizarProveedor=${proveedor.codigo}">
+		                         		<button type="button" class="btn btn-danger">
+		                         			<i class="fa fa-trash-o"></i>&nbsp;
+		                         		</button>
+									</a>
+		                        </td>
 
                         
                       </tr>
                      
-                     
+                     </c:forEach>
                      
                     </tbody>
                   </table>
@@ -128,7 +137,7 @@
     </div><!-- /#right-panel -->
 
 
-    
+    <%@ include file="RegistrarProveedor.jsp" %>
  
 <%@ include file="../General/Scripts.jsp"%>
   
