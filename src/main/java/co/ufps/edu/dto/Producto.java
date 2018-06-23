@@ -1,6 +1,7 @@
 package co.ufps.edu.dto;
 
-import java.util.Date;
+import java.sql.Date;
+import org.springframework.util.StringUtils;
 
 public class Producto {
 
@@ -117,6 +118,16 @@ public class Producto {
 
   public void setFechaVencimiento(Date fechaVencimiento) {
     this.fechaVencimiento = fechaVencimiento;
+  }
+
+  public boolean validarDatos(){
+    return (!StringUtils.isEmpty(this.nombre) 
+          && !StringUtils.isEmpty(this.fechaVencimiento.toString())
+          && this.proveedor > 0 
+          && this.categoria > 0
+          && this.stock > 0
+          && this.precioVenta > 0
+          && this.costo > 0);
   }
 
 

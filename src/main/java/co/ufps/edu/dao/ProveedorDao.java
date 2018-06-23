@@ -1,8 +1,9 @@
 package co.ufps.edu.dao;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
-
+import java.util.Map;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 
@@ -81,5 +82,20 @@ public class ProveedorDao {
 	    return (result == 1) ? "Registro exitoso"
 	        : "El proveedor no pudo ser registrado. Contacte al administrador";
 	  }
+
+    public Map<Integer,String> getlistaProveedores() {
+      Map<Integer,String> proveedores = new HashMap<Integer,String>();
+
+      SqlRowSet sqlRowSet = springDbMgr.executeQuery(   "select      proveedor.codigo               codigo, "
+                                                      + "            proveedor.nomEmpresa           nombre "
+                                                      + "from        proveedor "
+                                                      + "ORDER BY    proveedor.codigo desc");
+
+      while (sqlRowSet.next()) {
+        proveedores.put(sqlRowSet.getInt("codigo"), sqlRowSet.getString("nombre"));
+      }
+
+      return proveedores;
+    }
 
 }
