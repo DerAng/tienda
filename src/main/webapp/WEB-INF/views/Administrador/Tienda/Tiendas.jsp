@@ -63,10 +63,8 @@
                   <table id="bootstrap-data-table" class="table table-striped table-bordered">
                   
                     <thead>
-                      <tr>
-                      	
+                      <tr>                      	
                         <th>NIT</th>
-                        <th style="display: none">codigo</th>
                         <th>Nombre</th>
                         <th>Administrador</th>
                         <th>Direccion</th>
@@ -78,7 +76,6 @@
                     	<c:forEach var="tienda" items="${tiendas}">
 		                      <tr>
 		                        <td>${tienda.nit}</td>
-		                        <td>${tienda.codigo}</td>
 		                        <td>${tienda.nombre}</td>
 		                        <td>${tienda.nombreAdministrador}</td>
 		                        <td>${tienda.direccion}</td>

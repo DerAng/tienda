@@ -2,7 +2,6 @@
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%> 
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%> 
 
 <!doctype html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
@@ -27,20 +26,11 @@
 
         <!-- Header-->
         <header id="header" class="header">
-
             <div class="header-menu">
-
                 <div class="col-sm-7">
-                
-
                     <a id="menuToggle" class="menutoggle pull-left"><i class="fa fa fa-tasks"></i></a>
-                   
-                
                 </div>
-
-                 
             </div>
-
         </header><!-- /header -->
         <!-- Header-->
 
@@ -64,15 +54,9 @@
                                   <button class=" btn btn-primary">IMPORTAR</button>
                                   <button class="btn btn-success">EXPORTAR</button>
                                   <button class=" btn btn-secondary" data-toggle="modal" data-target="#largeModal">CREAR NUEVO VENDEDOR</button>
-                               
-                                    
+                                 
                               </div>
                             </div>
-
-
-
-                           
-
                     <div class="card-body">
                   <table id="bootstrap-data-table" class="table table-striped table-bordered">
                     <thead>
@@ -85,30 +69,33 @@
                         <th>Fecha De Nacimiento</th>
                         <th>Accion</th>
 
-                     
                       </tr>
                     </thead>
                     <tbody>
-                      <tr>
-                      
-                       <td>Juan Esteban</td>
-                        <td>Perez Mogollon</td>
-                        <td>Avenida 6 # 5-23</td>
-                        <td>5834567</td>
-                        <td>28/05/2016</td>
-                        
-                        <td>
-
-                          <button type="button" class="btn btn-success"><i class="fa fa-pencil"></i>&nbsp;</button>
-                         
-                         <button type="button" class="btn btn-danger"><i class="fa fa-trash-o"></i>&nbsp;</button>
-
-                        </td>
-
-                        
-                      </tr>
-                     
-                     
+	                     <c:forEach var="vendedor" items="${vendedores}">
+			                      <tr>
+			                        <td>${vendedor.nombre}</td>
+			                        <td>${vendedor.apellido}</td>
+			                        <td>${vendedor.direccion}</td>
+			                        <td>${vendedor.telefono}</td>
+			                        <td>${vendedor.fechaNacimiento}</td>
+			                        
+			                        
+			                        <td>
+										<a href="${contextPath}/actualizarTienda?id=${vendedor.codigo}">
+			                          		<button type="button" class="btn btn-success">
+			                          			<i class="fa fa-pencil"></i>&nbsp;
+			                          		</button>
+			                         	</a>
+			                         	<a href="${contextPath}/actualizarTienda?id=${vendedor.codigo}">
+			                         		<button type="button" class="btn btn-danger">
+			                         			<i class="fa fa-trash-o"></i>&nbsp;
+			                         		</button>
+										</a>
+			                        </td>
+					                    
+			                      </tr>
+	                     	</c:forEach>
                      
                     </tbody>
                   </table>
