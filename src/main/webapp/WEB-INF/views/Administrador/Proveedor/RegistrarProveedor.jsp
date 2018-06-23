@@ -65,7 +65,7 @@
                                     	<label for="email-input" class=" form-control-label">Correo Electronico</label></div>
                                     <div class="col-12 col-md-9">
                                     	
-                                    	<form:input id="correoElectronico" path="correoElectronico" class="form-control" placeholder="JuanLuis@gmail.com" aria-invalid="false" required = "true"/>
+                                    	<form:input type="email" id="correoElectronico" path="correoElectronico" class="form-control" placeholder="JuanLuis@gmail.com" aria-invalid="false" required = "true"/>
                                     </div>
                                 </div>
 

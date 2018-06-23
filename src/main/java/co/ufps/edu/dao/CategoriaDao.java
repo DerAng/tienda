@@ -1,8 +1,9 @@
 package co.ufps.edu.dao;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
-
+import java.util.Map;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 
 import co.ufps.edu.bd.SpringDbMgr;
@@ -44,4 +45,19 @@ public class CategoriaDao {
 		
 		return categorias;
 	}
+
+	  public Map<Integer,String> getListaCategorias() {
+	    Map<Integer,String> categorias = new HashMap<Integer,String>();
+
+	    SqlRowSet sqlRowSet = springDbMgr.executeQuery(   "select      categoria.codigo               codigoCategoria, "
+	                                                    + "            categoria.nombre               nombreCategoria "
+	                                                    + "from        categoria "
+	                                                    + "ORDER BY    categoria.codigo desc");
+
+	    while (sqlRowSet.next()) {
+	      categorias.put(sqlRowSet.getInt("codigoCategoria"), sqlRowSet.getString("nombreCategoria"));
+	    }
+
+	    return categorias;
+	  }
 }

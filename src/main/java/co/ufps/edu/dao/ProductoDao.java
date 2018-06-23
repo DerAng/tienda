@@ -2,6 +2,7 @@ package co.ufps.edu.dao;
 
 import java.util.ArrayList;
 import java.util.List;
+import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 import co.ufps.edu.bd.SpringDbMgr;
 import co.ufps.edu.dto.Producto;
@@ -32,7 +33,7 @@ public class ProductoDao {
                                                    + "            categoria.nombre            categoriaNombre "
                                                    
                                                    + "from        producto "
-                                                   + "inner join  productoproveedor ON productoproveedor.idProducto = producto.proveedor "
+                                                   + "inner join  productoproveedor ON productoproveedor.idProducto = producto.codigo "
                                                    + "inner join  proveedor         ON proveedor.codigo = productoproveedor.idProveedor "
                                                    + "inner join  categoria         ON categoria.codigo = producto.categoria "
                                                    + "ORDER BY    producto.codigo desc");
@@ -59,5 +60,59 @@ public class ProductoDao {
       
       return productos;
   }
+  
+  public String registrarProducto(Producto producto) {
+    // Agrego los datos del registro (nombreColumna/Valor)
+
+    MapSqlParameterSource map = new MapSqlParameterSource();
+    map.addValue("nombre", producto.getNombre());
+    map.addValue("categoria", producto.getCategoria());
+    map.addValue("stock", producto.getStock());
+    map.addValue("precioVenta", producto.getPrecioVenta());
+    map.addValue("costo", producto.getCosto());
+    map.addValue("fechaVencimiento", producto.getFechaVencimiento());
+
+    // Armar la sentencia de actualización debase de datos
+    String query =
+        "INSERT INTO producto(nombre,categoria,stock,precioVenta,costo,fechaVencimiento) VALUES(:nombre,:categoria,:stock,:precioVenta,:costo,:fechaVencimiento)";
+
+    // Ejecutar la sentencia
+    ResultDB result = new ResultDB();
+    try {
+      result = springDbMgr.executeDmlWithKey(query, map);
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+    long cod = result.getKey();
+    if(cod>0) {
+      insertarProductoProveedor(cod, producto.getProveedor());
+    }
+    // Si hubieron filas afectadas es por que si hubo registro, en caso contrario muestra el mensaje
+    // de error.
+    return (cod > 0) ? "Registro exitoso"
+        : "El producto no pudo ser registrado. Contacte al administrador";
+  }
+
+  private void insertarProductoProveedor(long cod, int proveedor) {
+ // Agrego los datos del registro (nombreColumna/Valor)
+
+    MapSqlParameterSource map = new MapSqlParameterSource();
+    map.addValue("idProducto", cod);
+    map.addValue("idProveedor", proveedor);
+
+    // Armar la sentencia de actualización debase de datos
+    String query =
+        "INSERT INTO productoproveedor(idProducto,idProveedor) VALUES(:idProducto,:idProveedor)";
+
+    // Ejecutar la sentencia
+    int result = 0;
+    try {
+      result = springDbMgr.executeDml(query, map);
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+    
+  }
+  
   
 }
