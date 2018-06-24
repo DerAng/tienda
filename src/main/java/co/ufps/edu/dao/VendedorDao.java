@@ -7,6 +7,7 @@ import org.springframework.jdbc.support.rowset.SqlRowSet;
 
 import co.ufps.edu.bd.SpringDbMgr;
 import co.ufps.edu.dto.Producto;
+import co.ufps.edu.dto.Tienda;
 import co.ufps.edu.dto.Vendedor;
 
 public class VendedorDao {
@@ -15,28 +16,6 @@ public class VendedorDao {
 	
 	public VendedorDao(){
 		springDbMgr = new SpringDbMgr();
-	}
-
-	public boolean registrarVendedor(Vendedor v) {
-
-		// Agrego los datos del registro (nombreColumna/Valor)
-
-		MapSqlParameterSource map = new MapSqlParameterSource();
-		map.addValue("codigo",v.getCodigo());
-		map.addValue("nombre", v.getNombre());
-		map.addValue("apellido", v.getApellido());
-		map.addValue("direccion", v.getDireccion());
-		map.addValue("telefono", v.getTelefono());
-		map.addValue("fechaNacimiento", v.getFechaNacimiento());
-		map.addValue("fechaIngreso", v.getFechaIngreso());
-		map.addValue("nombreTienda", v.getNombreTienda());
-
-		String query = "insert into vendedor(codigo,nombre,apellido,direccion,telefono,fechaNacimiento,fechaIngreso,nombreTienda) "
-				+ "values(:codigo,:nombre,:apellido,:direccion,:telefono,:fechaNacimiento,:fechaIngreso)";
-
-		int result = springDbMgr.executeDml(query, map);
-
-		return (result == 1);
 	}
 
   public List<Vendedor> getVendedores() {
@@ -53,7 +32,7 @@ public class VendedorDao {
                                                  + "ORDER BY    vendedor.codigo desc");
     
     while(sqlRowSet.next()){
-        // Creamos la tienda
+        // Creamos el Vendedor
         Vendedor vendedor = new Vendedor();
         
         // Llenamos el objeto de datos
@@ -71,5 +50,36 @@ public class VendedorDao {
     
     return vendedores;
   }	
+  
+  
+  
+  public String registrarVendedor(Vendedor vendedor) {
+	    // Agrego los datos del registro (nombreColumna/Valor)
+
+	    MapSqlParameterSource map = new MapSqlParameterSource();
+	    map.addValue("nombre", vendedor.getNombre());
+	    map.addValue("apellido", vendedor.getApellido());
+	    map.addValue("direccion",vendedor.getDireccion());
+	    map.addValue("telefono", vendedor.getTelefono());
+	    map.addValue("fechaNacimiento", vendedor.getFechaNacimiento());
+	    map.addValue("fechaIngreso", vendedor.getFechaIngreso());
+	    map.addValue("idTienda",vendedor.getNombreTienda());
+
+	    // Armar la sentencia de actualización debase de datos
+	    String query =
+	        "INSERT INTO proveedor(nombre,apellido,direccion,telefono,fechaNacimiento,fechaIngreso,idTienda) VALUES(:nombre,:apellido,:direccion,:telefono,:fechaNacimiento,:fechaIngreso,:idTienda)";
+
+	    // Ejecutar la sentencia
+	    int result = 0;
+	    try {
+	      result = springDbMgr.executeDml(query, map);
+	    } catch (Exception e) {
+	      e.printStackTrace();
+	    }
+	    // Si hubieron filas afectadas es por que si hubo registro, en caso contrario muestra el mensaje
+	    // de error.
+	    return (result == 1) ? "Registro exitoso"
+	        : "El vendedor no pudo ser registrado. Contacte al administrador";
+	  }
 
 }

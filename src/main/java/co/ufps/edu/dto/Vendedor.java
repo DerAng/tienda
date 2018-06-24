@@ -2,6 +2,8 @@ package co.ufps.edu.dto;
 
 import java.util.Date;
 
+import org.springframework.util.StringUtils;
+
 public class Vendedor {
 	
 	private int codigo;
@@ -93,7 +95,15 @@ public class Vendedor {
 		this.nombreTienda = nombreTienda;
 	}
 	
-	
+	public boolean validarDatos(){
+		return (!StringUtils.isEmpty(this.nombre) 
+		      && !StringUtils.isEmpty(this.apellido) 
+		      && !StringUtils.isEmpty(this.direccion)
+		      && !StringUtils.isEmpty(this.telefono)
+		      && !StringUtils.isEmpty(this.fechaNacimiento.toString())
+		      && !StringUtils.isEmpty(this.fechaIngreso.toString())
+		      && this.nombreTienda > 0);
+	}
 	
 	
 

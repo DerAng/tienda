@@ -74,6 +74,24 @@
                            
 
                     <div class="card-body">
+                    
+                     <!-- Si hubo un registro exitoso muestra el mensaje-->
+							    <c:if test="${not empty result}">
+							    	<div class="sufee-alert alert with-close alert-success alert-dismissible fade show">
+                                    	<c:out value='${result}' />
+                                       	<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        	<span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+							    </c:if>
+							    <c:if test="${not empty wrong}">		            
+		                        	<div class="sufee-alert alert with-close alert-danger alert-dismissible fade show">				                   	
+				                    		<c:out value='${wrong}' />
+				                    	<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+											<span aria-hidden="true">&times;</span>
+				                    	</button>
+				                   </div>
+							    </c:if>
                   <table id="bootstrap-data-table" class="table table-striped table-bordered">
                     <thead>
                       <tr>

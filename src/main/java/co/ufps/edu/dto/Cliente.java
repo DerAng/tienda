@@ -1,5 +1,7 @@
 package co.ufps.edu.dto;
 
+import org.springframework.util.StringUtils;
+
 public class Cliente {
 	
 	private int codigo;
@@ -80,6 +82,19 @@ public class Cliente {
 	}
 	public void setCorreoElectronico(String correoElectronico) {
 		this.correoElectronico = correoElectronico;
+	}
+	
+	public boolean validarDatos(){
+		return (!StringUtils.isEmpty(this.nombre) 
+		      && !StringUtils.isEmpty(this.apellido)
+		      && !StringUtils.isEmpty(this.direccion)
+		      && !StringUtils.isEmpty(this.telefono)
+		      && !StringUtils.isEmpty(this.correoElectronico)
+		      && !StringUtils.isEmpty(this.tipoDoc)
+		      && this.numeroDocumento > 0 
+		      );
+		
+		     
 	}
 	
 	

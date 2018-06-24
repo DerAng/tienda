@@ -1,5 +1,7 @@
 package co.ufps.edu.dto;
 
+import org.springframework.util.StringUtils;
+
 public class Categoria {
 	
 	private int codigo;
@@ -50,7 +52,11 @@ public class Categoria {
 	
 	
 
-	
+	public boolean validarDatos(){
+		return (!StringUtils.isEmpty(this.nombre) 
+		      && !StringUtils.isEmpty(this.descripcion)); 
+		     
+	}
 	
 	
 

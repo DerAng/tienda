@@ -7,50 +7,81 @@
                                
                                 
                             </div>
+                            
+                            <form:form id="formVendedor" action="guardarVendedor" method="post" class="form-horizontal" modelAttribute="vendedor">
                             <div class="modal-body">
 
-                                <form action="" method="post" enctype="multipart/form-data" class="form-horizontal">
+                              
 
                               
                                  
 
                                 <div class="row form-group">
-                                        <div class="col col-md-3"><label for="email-input" class=" form-control-label">Nombres</label></div>
-                                             <div class="col-12 col-md-9"><input type="email" id="email-input" name="email-input" placeholder="Ana Maria" class="form-control">
+                                        <div class="col col-md-3">
+                                        	<label for="email-input" class=" form-control-label">Nombres</label>
                                         </div>
+                                           <div class="col-12 col-md-9">
+                                                <form:input id="nombre" path="nombre" class="form-control" placeholder="Ana Maria" aria-invalid="false" required = "true"/>
+                                         		
+                                           </div>
                                 </div>
 
                             
                                   <div class="row form-group">
-                                    <div class="col col-md-3"><label for="email-input" class=" form-control-label">Apellidos</label></div>
-                                    <div class="col-12 col-md-9"><input type="email" id="email-input" name="email-input" placeholder="Garcia Duarte" class="form-control"></div>
+                                    <div class="col col-md-3">
+                                    	<label for="email-input" class=" form-control-label">Apellidos</label>
+                                    </div>
+                                    <div class="col-12 col-md-9">
+                                    
+                                    	 <form:input id="apellido" path="apellido" class="form-control" placeholder="Garcia Duarte" aria-invalid="false" required = "true"/>
+                                    </div>
                                   </div>
 
 
 
                                   <div class="row form-group">
-                                    <div class="col col-md-3"><label for="email-input" class=" form-control-label">Direccion</label></div>
-                                    <div class="col-12 col-md-9"><input type="email" id="email-input" name="email-input" placeholder="Avenida 0 # 3-22" class="form-control"></div>
+                                    <div class="col col-md-3">
+                                    	<label for="email-input" class=" form-control-label">Direccion</label>
+                                    </div>
+                                    <div class="col-12 col-md-9">
+                                    	
+                                    	 <form:input id="direccion" path="direccion" class="form-control" placeholder="Avenida 0 # 3-22" aria-invalid="false" required = "true"/>
+                                    </div>
                                 </div>
                                   
 
 
                                 <div class="row form-group">
-                                    <div class="col col-md-3"><label for="email-input" class=" form-control-label">Telefono</label></div>
-                                    <div class="col-12 col-md-9"><input type="email" id="email-input" name="email-input" placeholder="5825053" class="form-control">
+                                    <div class="col col-md-3">
+                                	    <label for="email-input" class=" form-control-label">Telefono</label>
+                                    </div>
+                                    <div class="col-12 col-md-9">
+                                    
+                                    	 <form:input id="telefono" path="telefono" class="form-control" placeholder="5825053" aria-invalid="false" required = "true"/>
                                     </div>
                                 </div>
 
 
                                  <div class="row form-group">
-                                    <div class="col col-md-3"><label for="email-input" class=" form-control-label">Fecha de Nacimiento</label></div>
-                                    <div class="col-12 col-md-9"><input type="email" id="email-input" name="email-input" placeholder="AnaDuarte@gmail.com" class="form-control">
+                                    <div class="col col-md-3">
+                                   		 <label for="email-input" class=" form-control-label">Fecha de Nacimiento</label>
+                                    </div>
+                                    <div class="col-12 col-md-9">
+                                    	
+                                    		 <form:input id="fechaNacimiento" path="fechaNacimiento" class="form-control" type="date" aria-invalid="false" required = "true"/>
                                     </div>
                                 </div>
+                                
+                                
 
                                   <div class="row form-group">
-                                    <div class="col col-md-3"><label for="email-input" class=" form-control-label">Fecha de Ingreso</label></div>
-                                    <div class="col-12 col-md-9"><input type="email" id="email-input" name="email-input" placeholder="" class="form-control">
+                                    <div class="col col-md-3">
+                                    	<label for="email-input" class=" form-control-label">Fecha de Ingreso</label>
+                                    </div>
+                                    <div class="col-12 col-md-9">
+                                    	
+                                    	 <form:input id="fechaIngreso" path="fechaIngreso" class="form-control" type="date" aria-invalid="false" required = "true"/>
+                                    	
                                     </div>
                                 </div>
 
@@ -59,23 +90,22 @@
                                 <div class="row form-group">
                                     <div class="col col-md-3"><label for="select" class=" form-control-label">Nombre Tienda</label></div>
                                     <div class="col-12 col-md-9">
-                                      <select name="select" id="select" class="form-control">
-                                        <option value="0"></option>
-                                        <option value="1">Tienda La 22</option>
-                                        
-                                        
-                                      </select>
+                                     <form:select path="nombreTienda" id="nombreTienda" class="form-control">
+				                        <form:option value="0" label="Seleccione la tienda" />
+				                        <form:options items="${tiendas}"/>
+				                      </form:select>  
                                     </div>
                                  </div>
 
-                                </form>
+                                
 
 
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                                <button type="button" class="btn btn-primary">Registrar</button>
+                                <button type="submit" class="btn btn-primary">Registrar</button>
                             </div>
+                            </form:form> 
                         </div>
                     </div>
                 </div>

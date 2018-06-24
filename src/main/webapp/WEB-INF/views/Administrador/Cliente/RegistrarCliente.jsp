@@ -7,50 +7,69 @@
                                
                                 
                             </div>
+                            
+                             <form:form id="formCliente" action="guardarCliente" method="post" class="form-horizontal" modelAttribute="cliente">
                             <div class="modal-body">
 
-                                <form action="" method="post" enctype="multipart/form-data" class="form-horizontal">
-
                               
-
-
                                 <div class="row form-group">
                                     <div class="col col-md-3"><label for="select" class=" form-control-label">Tipo de Documento</label></div>
                                     <div class="col-12 col-md-9">
-                                      <select name="select" id="select" class="form-control">
-                                        <option value="0"></option>
+                                      <form:select path="tipoDoc" id="tipoDoc" class="form-control">
+                                        <option value="0" label="Seleccione tipo documento"></option>
                                         <option value="1">Cedula Ciudadania</option>
                                         <option value="2">Tarjeta de Identidad</option>
                                         
-                                      </select>
+                                      </form:select> 
                                     </div>
                                  </div>
 
 
                                   <div class="row form-group">
-                                    <div class="col col-md-3"><label for="email-input" class=" form-control-label">Numero de Documento</label></div>
-                                    <div class="col-12 col-md-9"><input type="email" id="email-input" name="email-input" placeholder="1090480323" class="form-control"></div>
+                                    <div class="col col-md-3">
+                                    	<label for="email-input" class=" form-control-label">Numero de Documento</label>
+                                    </div>
+                                    <div class="col-12 col-md-9">
+                                    	
+                                    	<form:input id="numeroDocumento" path="numeroDocumento" class="form-control" placeholder="1090480323" aria-invalid="false" required = "true"/>
+                                    </div>
+                                    	
                                   </div>
 
 
 
                                   <div class="row form-group">
-                                    <div class="col col-md-3"><label for="email-input" class=" form-control-label">Nombres</label></div>
-                                    <div class="col-12 col-md-9"><input type="email" id="email-input" name="email-input" placeholder="Juan Miguel" class="form-control"></div>
+                                    <div class="col col-md-3">
+                                    	<label for="email-input" class=" form-control-label">Nombres</label>
+                                    </div>
+                                    <div class="col-12 col-md-9">
+                                    	
+                                    	<form:input id="nombre" path="nombre" class="form-control" placeholder="Juan Miguel" aria-invalid="false" required = "true"/>
+                                    </div>
                                 </div>
                                   
 
 
                                 <div class="row form-group">
-                                    <div class="col col-md-3"><label for="email-input" class=" form-control-label">Apellidos</label></div>
-                                    <div class="col-12 col-md-9"><input type="email" id="email-input" name="email-input" placeholder="Angel Perez" class="form-control">
+                                    <div class="col col-md-3">
+                                    	<label for="email-input" class=" form-control-label">Apellidos</label>
+                                    </div>
+                                    <div class="col-12 col-md-9">
+                                    	
+                                    	<form:input id="apellido" path="apellido" class="form-control" placeholder="Angel Perez" aria-invalid="false" required = "true"/>
+                                    	
                                     </div>
                                 </div>
 
 
                                  <div class="row form-group">
-                                    <div class="col col-md-3"><label for="email-input" class=" form-control-label">Direccion</label></div>
-                                    <div class="col-12 col-md-9"><input type="email" id="email-input" name="email-input" placeholder="Avenida 5 # 4-22" class="form-control">
+                                    <div class="col col-md-3">
+                                    	<label for="email-input" class=" form-control-label">Direccion</label>
+                                    </div>
+                                    <div class="col-12 col-md-9">
+                                    	
+                                    	<form:input id="direccion" path="direccion" class="form-control" placeholder="Avenida 5 # 4-22" aria-invalid="false" required = "true"/>
+                                    	
                                     </div>
                                 </div>
 
@@ -62,24 +81,31 @@
                                         <label for="email-input" class=" form-control-label">Telefono</label>
                                     </div>
                                     <div class="col-12 col-md-9">
-                                        <input type="email" id="email-input" name="email-input" placeholder="5849395" class="form-control">
+                                        
+                                        <form:input id="telefono" path="telefono" class="form-control" placeholder="5825053" aria-invalid="false" required = "true"/>
                                     </div>
                                 </div>
 
 
                                  <div class="row form-group">
-                                    <div class="col col-md-3"><label for="email-input" class=" form-control-label">Correo electronico</label></div>
-                                    <div class="col-12 col-md-9"><input type="email" id="email-input" name="email-input" placeholder="juanm@gmail.com" class="form-control"></div>
+                                    <div class="col col-md-3">
+                                    	<label for="email-input" class=" form-control-label">Correo electronico</label>
+                                    </div>
+                                    
+                                    <div class="col-12 col-md-9">
+                                    	
+                                    	<form:input id="correoElectronico" path="correoElectronico" class="form-control" placeholder="juanm@gmail.com" aria-invalid="false" required = "true"/>
+                                    </div>
                                 </div>
 
-                                </form>
-
-
+                               
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                                <button type="button" class="btn btn-primary">Registrar</button>
+                                <button type="submit" class="btn btn-primary">Registrar</button>
                             </div>
+                            
+                             </form:form>
                         </div>
                     </div>
                 </div>
