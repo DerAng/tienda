@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 import co.ufps.edu.bd.SpringDbMgr;
+import co.ufps.edu.dto.Categoria;
 import co.ufps.edu.dto.Producto;
 import co.ufps.edu.dto.Proveedor;
 import co.ufps.edu.dto.Tienda;
@@ -114,5 +115,65 @@ public class ProductoDao {
     
   }
   
+  public Producto obtenerProductoPorId(long idProducto) {
+ // Lista para retornar con los datos
+    Producto producto = new Producto();
+
+    // Consulta para realizar en base de datos
+    MapSqlParameterSource map = new MapSqlParameterSource();
+    map.addValue("codigo", idProducto);
+    SqlRowSet sqlRowSet = springDbMgr.executeQuery(" SELECT * FROM producto WHERE codigo = :codigo", map);
+
+    // Consulto si la categoria existe
+    if (sqlRowSet.next()) {
+      // Almaceno los datos de la categoria
+      producto.setCodigo(sqlRowSet.getInt("codigo"));
+      producto.setNombre(sqlRowSet.getString("nombre"));
+    }
+
+    // Retorna la categoria desde base de datos
+    return producto;
+  }
+  
+  
+  public String eliminarProducto(Producto producto) {
+    // Agrego los datos de la eliminación (nombreColumna/Valor)
+    MapSqlParameterSource map = new MapSqlParameterSource();
+    map.addValue("codigo", producto.getCodigo());
+
+    // Armar la sentencia de actualización debase de datos
+    String query = "DELETE FROM producto WHERE codigo = :codigo";
+
+    // Ejecutar la sentencia
+    int result = 0;
+    try {
+      result = springDbMgr.executeDml(query, map);
+    } catch (Exception e) {
+      new Exception();
+    }
+    // Si hubieron filas afectadas es por que si hubo registro, en caso contrario muestra el mensaje
+    // de error.
+    return (result == 1) ? "Eliminacion exitosa"
+        : "La categoria no puede ser eliminada. Contacte al administrador.";
+  }
+  
+  public void eliminarProductoPorProveedor(Producto producto) {
+    // Agrego los datos de la eliminación (nombreColumna/Valor)
+    MapSqlParameterSource map = new MapSqlParameterSource();
+    map.addValue("idProducto", producto.getCodigo());
+
+    // Armar la sentencia de actualización debase de datos
+    String query = "DELETE FROM productoproveedor WHERE idProducto = :idProducto";
+
+    // Ejecutar la sentencia
+    int result = 0;
+    try {
+      result = springDbMgr.executeDml(query, map);
+    } catch (Exception e) {
+      new Exception();
+    }
+
+  }
+
   
 }
