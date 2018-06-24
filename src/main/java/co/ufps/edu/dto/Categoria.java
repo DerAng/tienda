@@ -7,18 +7,6 @@ public class Categoria {
 	private int codigo;
 	private String nombre;
 	private String descripcion;
-	
-	public Categoria(){
-		
-	}
-	
-	public Categoria(int codigo, String nombre, String descripcion) {
-		super();
-		this.codigo = codigo;
-		this.nombre = nombre;
-		this.descripcion = descripcion;
-	}
-
 
 	public int getCodigo() {
 		return codigo;
@@ -48,16 +36,11 @@ public class Categoria {
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
 	}
-	
-	
-	
 
 	public boolean validarDatos(){
 		return (!StringUtils.isEmpty(this.nombre) 
 		      && !StringUtils.isEmpty(this.descripcion)); 
 		     
 	}
-	
-	
 
 }
