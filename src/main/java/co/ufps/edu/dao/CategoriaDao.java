@@ -75,6 +75,7 @@ public class CategoriaDao {
 	    // de error.
 	    return (result == 1) ? "Registro exitoso"
 	        : "La categoria no pudo ser registrada. Contacte al administrador";
+	}
 
 	  public Map<Integer,String> getListaCategorias() {
 	    Map<Integer,String> categorias = new HashMap<Integer,String>();
