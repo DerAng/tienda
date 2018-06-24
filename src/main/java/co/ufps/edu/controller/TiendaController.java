@@ -1,7 +1,6 @@
 package co.ufps.edu.controller;
 
 import javax.servlet.http.HttpServletRequest;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,73 +16,105 @@ import co.ufps.edu.dto.Tienda;
 
 @Controller
 public class TiendaController {
-	
-	private TiendaDao tiendaDao;
-	private AdministradorDao administradorDao;
-	
-	public TiendaController(){
-		tiendaDao = new TiendaDao(); 
-		administradorDao = new AdministradorDao();
-	}
-	
-	@GetMapping("tiendas") // Base
-	public String index(Model model) {
-	    model.addAttribute("administradores",administradorDao.getlistaAdministradores());
-		model.addAttribute("tiendas", tiendaDao.getTiendas());
-		return "/Administrador/Tienda/Tiendas"; // Nombre del archivo jsp
-	}
-	
-	@ModelAttribute("tienda")
-	public Tienda setUpUserForm() {		
-		return new Tienda();
-	}
-	
-	@PostMapping("/guardarTienda")
-	public String RegistrarTienda(@ModelAttribute("tienda") Tienda tienda, Model model) {
-		if (tienda.validarDatos()) {
-			String mensaje = tiendaDao.registrarTienda(tienda);
-			if(mensaje.equals("Registro exitoso")) {
-    			model.addAttribute("result", "Tienda registrada con exito");
-    			model.addAttribute("tienda", new Tienda());
-    			return index(model);
-			}else {
-	           model.addAttribute("wrong", mensaje);
-	           return index(model);
-			}
-		} else {			
-			model.addAttribute("wrong", "Campos invalidos.");
-			return index(model);
-		}
 
-	}
-	
-	
-	 @GetMapping(value = "/eliminarTienda")
-	  public String eliminarTienda(@RequestParam("codigo") long codigoTienda, Model model) {
-	    // Consulto que el Id sea mayor a 0.
-	    if (codigoTienda <= 0) {
-	      return index(model);
-	    }
-	    Tienda tienda = tiendaDao.obtenerTiendaPorCodigo(codigoTienda);
-	    model.addAttribute("tienda", tienda);
-	    return "Administrador/Tienda/EliminarTienda"; // Nombre del archivo jsp
-	  }
+  private TiendaDao tiendaDao;
+  private AdministradorDao administradorDao;
+
+  public TiendaController() {
+    tiendaDao = new TiendaDao();
+    administradorDao = new AdministradorDao();
+  }
+
+  @GetMapping("tiendas") // Base
+  public String index(Model model) {
+    model.addAttribute("administradores", administradorDao.getlistaAdministradores());
+    model.addAttribute("tiendas", tiendaDao.getTiendas());
+    return "/Administrador/Tienda/Tiendas"; // Nombre del archivo jsp
+  }
+
+  @ModelAttribute("tienda")
+  public Tienda setUpUserForm() {
+    return new Tienda();
+  }
+
+  @PostMapping("/guardarTienda")
+  public String RegistrarTienda(@ModelAttribute("tienda") Tienda tienda, Model model) {
+    if (tienda.validarDatos()) {
+      String mensaje = tiendaDao.registrarTienda(tienda);
+      if (mensaje.equals("Registro exitoso")) {
+        model.addAttribute("result", "Tienda registrada con exito");
+        model.addAttribute("tienda", new Tienda());
+        return index(model);
+      } else {
+        model.addAttribute("wrong", mensaje);
+        return index(model);
+      }
+    } else {
+      model.addAttribute("wrong", "Campos invalidos.");
+      return index(model);
+    }
+
+  }
 
 
-	  @PostMapping(value = "/borrarTienda")
-	  public String borrarCategoria(@ModelAttribute("tienda") Tienda tienda, Model model) {
+  @GetMapping(value = "/eliminarTienda")
+  public String eliminarTienda(@RequestParam("codigo") long codigoTienda, Model model) {
+    // Consulto que el Id sea mayor a 0.
+    if (codigoTienda <= 0) {
+      return index(model);
+    }
+    Tienda tienda = tiendaDao.obtenerTiendaPorCodigo(codigoTienda);
+    model.addAttribute("tienda", tienda);
+    return "Administrador/Tienda/EliminarTienda"; // Nombre del archivo jsp
+  }
 
-	    String mensaje = tiendaDao.eliminarTienda(tienda);
-	    if (mensaje.equals("Eliminacion exitosa")) {
-	      model.addAttribute("result", "Tienda eliminada con éxito.");
-	      return index(model);
-	    } else {
-	      model.addAttribute("wrong", mensaje);
-	      return eliminarTienda(tienda.getCodigo(), model);
-	      
-	    }
 
-	  }
-	
+  @PostMapping(value = "/borrarTienda")
+  public String borrarCategoria(@ModelAttribute("tienda") Tienda tienda, Model model) {
+
+    String mensaje = tiendaDao.eliminarTienda(tienda);
+    if (mensaje.equals("Eliminacion exitosa")) {
+      model.addAttribute("result", "Tienda eliminada con éxito.");
+      return index(model);
+    } else {
+      model.addAttribute("wrong", mensaje);
+      return eliminarTienda(tienda.getCodigo(), model);
+
+    }
+
+  }
+  
+  @GetMapping(value = "/actualizarTienda")
+  public String actualizarCategoria(@RequestParam("codigo") long codigoCategoria, Model model) {
+    // Consulto que el Id sea mayor a 0.
+    if (codigoCategoria <= 0) {
+      return index(model);
+    }
+    Tienda tienda = tiendaDao.obtenerTiendaPorCodigo(codigoCategoria);
+    model.addAttribute("tienda", tienda);
+    model.addAttribute("administradores", administradorDao.getlistaAdministradores());
+    return "Administrador/Tienda/ActualizarTienda"; // Nombre del archivo jsp
+  }
+
+  @PostMapping(value = "/editarTienda")
+  public String editarTienda(@ModelAttribute("tienda") Tienda tienda, Model model) {
+
+    // Consulta si tiene todos los campos llenos
+    if (tienda.validarDatos()) {
+      String mensaje = tiendaDao.editarTienda(tienda);
+      if (mensaje.equals("Actualizacion exitosa")) {
+        model.addAttribute("result", "Tienda actualizada con éxito.");
+        return index(model);
+      } else {
+        model.addAttribute("wrong", mensaje);
+        return "Administrador/Tienda/ActualizarTienda"; // Nombre del archivo jsp
+      }
+      //
+    } else {
+      model.addAttribute("wrong", "Debes llenar todos los campos.");
+      return "Administrador/Tienda/ActualizarTienda"; // Nombre del archivo jsp
+    }
+  }
+
 
 }
