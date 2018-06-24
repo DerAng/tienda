@@ -76,9 +76,8 @@
                                     <div class="col-12 col-md-9">
                                      
                                        <form:select path="formaPago" id="formaPago" class="form-control">
-                                        <option value="0">Efectivo</option>
-                                        <option value="1">Cheque</option>
-                                        <option value="2">Credito</option>
+				                        <form:option value="" label="Seleccione la forma de pago" />
+				                        <form:options items="${formas}"/>
                                        
                                         
                                        </form:select>

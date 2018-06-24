@@ -27,26 +27,14 @@
 
         <!-- Header-->
         <header id="header" class="header">
-
             <div class="header-menu">
-
-                <div class="col-sm-7">
-                
-
-                    <a id="menuToggle" class="menutoggle pull-left"><i class="fa fa fa-tasks"></i></a>
-                   
-                
+                <div class="col-sm-7">                
+                    <a id="menuToggle" class="menutoggle pull-left"><i class="fa fa fa-tasks"></i></a>                             
                 </div>
-
-                 
             </div>
-
         </header><!-- /header -->
         <!-- Header-->
-
-
-     
-
+        
         <div class="content mt-3">
             <div class="animated fadeIn">
                 <div class="row">
@@ -56,22 +44,14 @@
                         <div class="card-header">
                             <strong class="card-title">PROVEEDORES</strong>
                         </div>
-
-
                            <div class="row">
                               <div class="col text-right">
                               </br>
                                   <button class=" btn btn-primary">IMPORTAR</button>
                                   <button class="btn btn-success">EXPORTAR</button>
-                                  <button class=" btn btn-secondary" data-toggle="modal" data-target="#largeModal">CREAR NUEVO PROVEEDOR</button>
-                               
-                                    
+                                  <button class=" btn btn-secondary" data-toggle="modal" data-target="#largeModal">CREAR NUEVO PROVEEDOR</button>                                                                
                               </div>
                             </div>
-
-
-
-                           
 
                     <div class="card-body">
                     
@@ -113,24 +93,18 @@
                     <tbody>
                     <c:forEach var="proveedor" items="${proveedores}">
                       <tr>
-                        
-                                
 		                        <td>${proveedor.nit_Empresa}</td>
 		                        <td>${proveedor.nomEmpresa}</td>
 		                         <td>${proveedor.nombreContacto}</td>
 		                        <td>${proveedor.telefono}</td>
 		                        <td>${proveedor.correoElectronico}</td>
-		                       
-                        
-                        
-                         
 		                        <td>
 									<a href="${contextPath}/actualizarProveedor?id=${proveedor.codigo}">
 		                          		<button type="button" class="btn btn-success">
 		                          			<i class="fa fa-pencil"></i>&nbsp;
 		                          		</button>
 		                         	</a>
-		                         	<a href="${contextPath}/actualizarProveedor=${proveedor.codigo}">
+		                         	<a href="${contextPath}/eliminarProveedor?id=${proveedor.codigo}">
 		                         		<button type="button" class="btn btn-danger">
 		                         			<i class="fa fa-trash-o"></i>&nbsp;
 		                         		</button>
