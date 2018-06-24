@@ -105,7 +105,7 @@
 			                          			<i class="fa fa-pencil"></i>&nbsp;
 			                          		</button>
 			                         	</a>
-			                         	<a href="${contextPath}/actualizarTienda?id=${vendedor.codigo}">
+			                         	<a href="${contextPath}/eliminarVendedor?codigo=${vendedor.codigo}">
 			                         		<button type="button" class="btn btn-danger">
 			                         			<i class="fa fa-trash-o"></i>&nbsp;
 			                         		</button>

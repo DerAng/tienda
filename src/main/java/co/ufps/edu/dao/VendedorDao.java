@@ -67,7 +67,7 @@ public class VendedorDao {
 
 	    // Armar la sentencia de actualización debase de datos
 	    String query =
-	        "INSERT INTO proveedor(nombre,apellido,direccion,telefono,fechaNacimiento,fechaIngreso,idTienda) VALUES(:nombre,:apellido,:direccion,:telefono,:fechaNacimiento,:fechaIngreso,:idTienda)";
+	        "INSERT INTO vendedor(nombre,apellido,direccion,telefono,fechaNacimiento,fechaIngreso,idTienda) VALUES(:nombre,:apellido,:direccion,:telefono,:fechaNacimiento,:fechaIngreso,:idTienda)";
 
 	    // Ejecutar la sentencia
 	    int result = 0;
@@ -81,5 +81,54 @@ public class VendedorDao {
 	    return (result == 1) ? "Registro exitoso"
 	        : "El vendedor no pudo ser registrado. Contacte al administrador";
 	  }
+  
+  
+  
+  
+
+  
+  public Vendedor obtenerVendedorPorCodigo(long codigoVendedor) {
+ // Lista para retornar con los datos
+    Vendedor vendedor = new Vendedor();
+
+    // Consulta para realizar en base de datos
+    MapSqlParameterSource map = new MapSqlParameterSource();
+    map.addValue("codigo", codigoVendedor);
+    SqlRowSet sqlRowSet = springDbMgr.executeQuery(" SELECT * FROM vendedor WHERE codigo = :codigo", map);
+
+    // Consulto si el vendedor existe
+    if (sqlRowSet.next()) {
+      // Almaceno los datos de la tienda
+     vendedor.setCodigo(sqlRowSet.getInt("codigo"));
+     vendedor.setNombre(sqlRowSet.getString("nombre"));
+     
+    }
+
+    // Retorna el vendedor desde base de datos
+      return vendedor;
+  }
+
+
+  public String eliminarVendedor(Vendedor vendedor) {
+
+    // Agrego los datos de la eliminación (nombreColumna/Valor)
+    MapSqlParameterSource map = new MapSqlParameterSource();
+    map.addValue("codigo", vendedor.getCodigo());
+
+    // Armar la sentencia de actualización debase de datos
+    String query = "DELETE FROM vendedor WHERE codigo = :codigo";
+
+    // Ejecutar la sentencia
+    int result = 0;
+    try {
+      result = springDbMgr.executeDml(query, map);
+    } catch (Exception e) {
+      new Exception();
+    }
+    // Si hubieron filas afectadas es por que si hubo registro, en caso contrario muestra el mensaje
+    // de error.
+    return (result == 1) ? "Eliminacion exitosa"
+        : "El vendedor no puede ser eliminado. Contacte al administrador.";
+  }
 
 }

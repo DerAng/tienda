@@ -128,4 +128,19 @@ public class TiendaDao {
     return (result == 1) ? "Eliminacion exitosa"
         : "La Tienda no puede ser eliminada. Contacte al administrador.";
   }
+
+  public Map<Integer,String> getListaTiendas() {
+    Map<Integer,String> tiendas = new HashMap<Integer,String>();
+
+    SqlRowSet sqlRowSet = springDbMgr.executeQuery(   "select      tienda.id                   idTienda, "
+                                                    + "            tienda.nombre               nombre "
+                                                    + "from        tienda "
+                                                    + "ORDER BY    tienda.id desc");
+
+    while (sqlRowSet.next()) {
+    	tiendas.put(sqlRowSet.getInt("idTienda"), sqlRowSet.getString("nombre"));
+    }
+
+    return tiendas;
+  }
 }
