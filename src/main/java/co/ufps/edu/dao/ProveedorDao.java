@@ -6,10 +6,8 @@ import java.util.List;
 import java.util.Map;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
-
 import co.ufps.edu.bd.SpringDbMgr;
 import co.ufps.edu.dto.Proveedor;
-import co.ufps.edu.dto.Tienda;
 
 public class ProveedorDao {
 	private SpringDbMgr springDbMgr;
@@ -96,6 +94,49 @@ public class ProveedorDao {
       }
 
       return proveedores;
+    }
+    
+    public Proveedor obtenerProveedorPorId(long idProveedor) {
+   // Lista para retornar con los datos
+      Proveedor proveedor = new Proveedor();
+
+      // Consulta para realizar en base de datos
+      MapSqlParameterSource map = new MapSqlParameterSource();
+      map.addValue("codigo", idProveedor);
+      SqlRowSet sqlRowSet = springDbMgr.executeQuery(" SELECT * FROM proveedor WHERE codigo = :codigo", map);
+
+      // Consulto si la categoria existe
+      if (sqlRowSet.next()) {
+        // Almaceno los datos de la categoria
+        proveedor.setCodigo(sqlRowSet.getInt("codigo"));
+        proveedor.setNomEmpresa(sqlRowSet.getString("nomEmpresa"));
+      }
+
+      // Retorna la categoria desde base de datos
+      return proveedor;
+    }
+
+
+    public String eliminarProveedor(Proveedor proveedor) {
+
+      // Agrego los datos de la eliminación (nombreColumna/Valor)
+      MapSqlParameterSource map = new MapSqlParameterSource();
+      map.addValue("codigo", proveedor.getCodigo());
+
+      // Armar la sentencia de actualización debase de datos
+      String query = "DELETE FROM proveedor WHERE codigo = :codigo";
+
+      // Ejecutar la sentencia
+      int result = 0;
+      try {
+        result = springDbMgr.executeDml(query, map);
+      } catch (Exception e) {
+        new Exception();
+      }
+      // Si hubieron filas afectadas es por que si hubo registro, en caso contrario muestra el mensaje
+      // de error.
+      return (result == 1) ? "Eliminacion exitosa"
+          : "El proveedor no puede ser eliminado. Contacte al administrador.";
     }
 
 }

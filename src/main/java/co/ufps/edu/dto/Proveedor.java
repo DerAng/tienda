@@ -12,27 +12,6 @@ public class Proveedor {
 	private String correoElectronico;
 	private String formaPago;
 
-	
-	public Proveedor() {
-		super();
-	}
-  
-		
-	
-	public Proveedor(int codigo,int nit_Empresa, String nomEmpresa, String nombreContacto, String telefono,
-			String correoElectronico, String formaPago) {
-		super();
-		this.nit_Empresa = nit_Empresa;
-		this.nomEmpresa = nomEmpresa;
-		this.nombreContacto = nombreContacto;
-		this.telefono = telefono;
-		this.correoElectronico = correoElectronico;
-		this.formaPago = formaPago;
-		this.codigo=codigo;
-	}
-
-
-
 
 	public int getNit_Empresa() {
 		return nit_Empresa;
@@ -78,12 +57,9 @@ public class Proveedor {
 		return correoElectronico;
 	}
 
-
 	public void setCorreoElectronico(String correoElectronico) {
 		this.correoElectronico = correoElectronico;
 	}
-	
-	
 
 	public int getCodigo() {
 		return codigo;
@@ -100,21 +76,15 @@ public class Proveedor {
 
 	public void setFormaPago(String formaPago) {
 		this.formaPago = formaPago;
-	}
-	
+	}	
 	
 	public boolean validarDatos(){
 		return (!StringUtils.isEmpty(this.nomEmpresa) 
 		      && !StringUtils.isEmpty(this.nombreContacto) 
 		      && !StringUtils.isEmpty(this.telefono)
 		      && !StringUtils.isEmpty(this.correoElectronico)
-		      && !StringUtils.isEmpty(this.formaPago)
-		     
-		      && this.nit_Empresa > 0) ;
-		     
+		      && !StringUtils.isEmpty(this.formaPago)		     
+		      && this.nit_Empresa > 0) ;		     
 	}
-	
-	
-	
 
 }
