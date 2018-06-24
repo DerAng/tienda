@@ -72,7 +72,8 @@ public class CategoriaController {
       return index(model);
     } else {
       model.addAttribute("wrong", mensaje);
-      return "Administrador/Categoria/EliminarCategoria";
+      return eliminarCategoria(categoria.getCodigo(), model);
+      
     }
 
   }
