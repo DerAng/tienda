@@ -3,14 +3,11 @@ package co.ufps.edu.dao;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-
-import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import java.util.Map;
+import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
-
 import co.ufps.edu.bd.SpringDbMgr;
 import co.ufps.edu.dto.Categoria;
-import co.ufps.edu.dto.Vendedor;
 
 
 public class CategoriaDao {

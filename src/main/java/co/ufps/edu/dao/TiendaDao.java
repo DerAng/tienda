@@ -81,10 +81,7 @@ public class TiendaDao {
         : "La tienda no pudo ser registrada. Contacte al administrador";
   }
   
-  
-  
-  
- 
+
   public Tienda obtenerTiendaPorCodigo(long codigoTienda) {
  // Lista para retornar con los datos
     Tienda tienda = new Tienda();
@@ -99,6 +96,10 @@ public class TiendaDao {
       // Almaceno los datos de la tienda
       tienda.setCodigo(sqlRowSet.getInt("id"));
       tienda.setNombre(sqlRowSet.getString("nombre"));
+      tienda.setNit(sqlRowSet.getInt("nit"));
+      tienda.setAdministrador(sqlRowSet.getInt("administrador"));
+      tienda.setDireccion(sqlRowSet.getString("direccion"));
+      tienda.setNombreRepresentante(sqlRowSet.getString("nombreRepresentante"));
      
     }
 
@@ -143,4 +144,36 @@ public class TiendaDao {
 
     return tiendas;
   }
+  
+  public String editarTienda(Tienda tienda) {
+    // Agrego los datos del registro (nombreColumna/Valor)
+
+    MapSqlParameterSource map = new MapSqlParameterSource();
+    map.addValue("id", tienda.getCodigo());
+    map.addValue("nit", tienda.getNit());
+    map.addValue("nombre", tienda.getNombre());
+    map.addValue("administrador", tienda.getAdministrador());
+    map.addValue("direccion", tienda.getDireccion());
+    map.addValue("nombreRepresentante", tienda.getNombreRepresentante());
+
+    // Armar la sentencia de actualización debase de datos
+    String query =
+        "UPDATE tienda SET nit = :nit, nombre = :nombre , administrador = :administrador, direccion = :direccion, nombreRepresentante = :nombreRepresentante where id = :id ";
+
+    // Ejecutar la sentencia
+    int result = 0;
+    try {
+      result = springDbMgr.executeDml(query, map);
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+    // Si hubieron filas afectadas es por que si hubo registro, en caso contrario muestra el mensaje
+    // de error.
+    return (result == 1) ? "Actualizacion exitosa"
+        : "La tienda no pudo ser actualizada. Contacte al administrador";
+    // Si hubieron filas afectadas es por que si hubo registro, en caso contrario muestra el mensaje
+    // de error.
+
+  }
+
 }

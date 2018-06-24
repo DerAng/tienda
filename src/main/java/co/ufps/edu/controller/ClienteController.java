@@ -76,7 +76,6 @@ public class ClienteController {
 	    return "Administrador/Cliente/EliminarCliente"; // Nombre del archivo jsp
 	  }
 
-
 	  @PostMapping(value = "/borrarCliente")
 	  public String borrarCliente(@ModelAttribute("cliente") Cliente cliente, Model model) {
 
@@ -86,11 +85,7 @@ public class ClienteController {
 	      return index(model);
 	    } else {
 	      model.addAttribute("wrong", mensaje);
-	      return eliminarCliente(cliente.getCodigo(), model);
-	      
+	      return eliminarCliente(cliente.getCodigo(), model);	      
 	    }
-
 	  }
-	
-
 }
