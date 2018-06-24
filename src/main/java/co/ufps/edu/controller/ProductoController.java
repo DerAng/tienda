@@ -5,9 +5,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import co.ufps.edu.dao.CategoriaDao;
 import co.ufps.edu.dao.ProductoDao;
 import co.ufps.edu.dao.ProveedorDao;
+import co.ufps.edu.dto.Categoria;
 import co.ufps.edu.dto.Producto;
 import co.ufps.edu.dto.Tienda;
 
@@ -53,6 +55,33 @@ public class ProductoController {
           model.addAttribute("wrong", "Campos invalidos.");
           return index(model);
       }
+  }
+  
+  @GetMapping(value = "/eliminarProducto")
+  public String eliminarCategoria(@RequestParam("id") long idProducto, Model model) {
+    // Consulto que el Id sea mayor a 0.
+    if (idProducto <= 0) {
+      return index(model);
+    }
+    Producto producto = productoDao.obtenerProductoPorId(idProducto);
+    model.addAttribute("producto", producto);
+    return "Administrador/Producto/EliminarProducto"; // Nombre del archivo jsp
+  }
+
+
+  @PostMapping(value = "/borrarProducto")
+  public String borrarCategoria(@ModelAttribute("producto") Producto producto, Model model) {
+    
+    productoDao.eliminarProductoPorProveedor(producto);
+    String mensaje = productoDao.eliminarProducto(producto);
+    if (mensaje.equals("Eliminacion exitosa")) {
+      model.addAttribute("result", "Producto eliminado con éxito.");
+      return index(model);
+    } else {
+      model.addAttribute("wrong", mensaje);
+      return eliminarCategoria(producto.getCodigo(), model);
+      
+    }
 
   }
 
