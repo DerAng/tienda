@@ -91,4 +91,50 @@ public class CategoriaDao {
 
 	    return categorias;
 	  }
+
+    public Categoria obtenerCategoriaPorId(long idCategoria) {
+   // Lista para retornar con los datos
+      Categoria categoria = new Categoria();
+
+      // Consulta para realizar en base de datos
+      MapSqlParameterSource map = new MapSqlParameterSource();
+      map.addValue("codigo", idCategoria);
+      SqlRowSet sqlRowSet = springDbMgr.executeQuery(" SELECT * FROM categoria WHERE codigo = :codigo", map);
+
+      // Consulto si la categoria existe
+      if (sqlRowSet.next()) {
+        // Almaceno los datos de la categoria
+        categoria.setCodigo(sqlRowSet.getInt("codigo"));
+        categoria.setNombre(sqlRowSet.getString("nombre"));
+        categoria.setDescripcion(sqlRowSet.getString("descripcion"));
+      }
+
+      // Retorna la categoria desde base de datos
+      return categoria;
+    }
+
+
+    public String eliminarCategoria(Categoria categoria) {
+
+      // Agrego los datos de la eliminación (nombreColumna/Valor)
+      MapSqlParameterSource map = new MapSqlParameterSource();
+      map.addValue("codigo", categoria.getCodigo());
+
+      // Armar la sentencia de actualización debase de datos
+      String query = "DELETE FROM categoria WHERE codigo = :codigo";
+
+      // Ejecutar la sentencia
+      int result = 0;
+      try {
+        result = springDbMgr.executeDml(query, map);
+      } catch (Exception e) {
+        new Exception();
+      }
+      // Si hubieron filas afectadas es por que si hubo registro, en caso contrario muestra el mensaje
+      // de error.
+      return (result == 1) ? "Eliminacion exitosa"
+          : "La categoria no puede ser eliminada. Contacte al administrador.";
+    }
+
+
 }

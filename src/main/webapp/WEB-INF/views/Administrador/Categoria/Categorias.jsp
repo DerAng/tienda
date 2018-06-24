@@ -119,7 +119,7 @@
 		                          			<i class="fa fa-pencil"></i>&nbsp;
 		                          		</button>
 		                         	</a>
-		                         	<a href="${contextPath}/actualizarCategoria?id=${categoria.codigo}">
+		                         	<a href="${contextPath}/eliminarCategoria?id=${categoria.codigo}">
 		                         		<button type="button" class="btn btn-danger">
 		                         			<i class="fa fa-trash-o"></i>&nbsp;
 		                         		</button>
