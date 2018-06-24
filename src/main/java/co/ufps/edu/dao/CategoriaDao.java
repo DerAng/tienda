@@ -1,9 +1,11 @@
 package co.ufps.edu.dao;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
+import java.util.Map;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 
 import co.ufps.edu.bd.SpringDbMgr;
@@ -46,6 +48,8 @@ public class CategoriaDao {
 		
 		return categorias;
 	}
+
+	
 	
 	
 	public String registrarCategoria(Categoria categoria) {
@@ -71,5 +75,19 @@ public class CategoriaDao {
 	    // de error.
 	    return (result == 1) ? "Registro exitoso"
 	        : "La categoria no pudo ser registrada. Contacte al administrador";
+
+	  public Map<Integer,String> getListaCategorias() {
+	    Map<Integer,String> categorias = new HashMap<Integer,String>();
+
+	    SqlRowSet sqlRowSet = springDbMgr.executeQuery(   "select      categoria.codigo               codigoCategoria, "
+	                                                    + "            categoria.nombre               nombreCategoria "
+	                                                    + "from        categoria "
+	                                                    + "ORDER BY    categoria.codigo desc");
+
+	    while (sqlRowSet.next()) {
+	      categorias.put(sqlRowSet.getInt("codigoCategoria"), sqlRowSet.getString("nombreCategoria"));
+	    }
+
+	    return categorias;
 	  }
 }
