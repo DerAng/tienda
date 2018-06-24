@@ -23,8 +23,6 @@ public class ProveedorController {
     proveedorDao = new ProveedorDao();
   }
 
-
-
   @GetMapping("proveedores") // Base
   public String index(Model model) {
     model.addAttribute("proveedores", proveedorDao.getProveedores());
@@ -36,7 +34,7 @@ public class ProveedorController {
     Map<String, String> formas = new HashMap<>();
     formas.put("Efectivo", "Efectivo");
     formas.put("Cheque", "Cheque");
-    formas.put("Creadito", "Credito");
+    formas.put("Credito", "Credito");
     return formas;
   }
 

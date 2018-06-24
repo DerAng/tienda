@@ -16,9 +16,8 @@
                                     <div class="col col-md-3"><label for="select" class=" form-control-label">Tipo de Documento</label></div>
                                     <div class="col-12 col-md-9">
                                       <form:select path="tipoDoc" id="tipoDoc" class="form-control">
-                                        <option value="0" label="Seleccione tipo documento"></option>
-                                        <option value="1">Cedula Ciudadania</option>
-                                        <option value="2">Tarjeta de Identidad</option>
+				                        <form:option value="" label="Seleccione el tipo de documento" />
+				                        <form:options items="${tipodocumentos}"/>
                                         
                                       </form:select> 
                                     </div>
