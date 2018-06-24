@@ -63,15 +63,9 @@
                               </br>
                                   <button class=" btn btn-primary">IMPORTAR</button>
                                   <button class="btn btn-success">EXPORTAR</button>
-                                  <button class=" btn btn-secondary" data-toggle="modal" data-target="#largeModal">CREAR NUEVA CATEGORIA</button>
-                               
-                                    
+                                  <button class=" btn btn-secondary" data-toggle="modal" data-target="#largeModal">CREAR NUEVA CATEGORIA</button>                                                                   
                               </div>
                             </div>
-
-
-
-                           
 
                     <div class="card-body">
                     
@@ -97,7 +91,6 @@
                     <thead>
                       <tr>
                         
-                        <th>Codigo</th>
                         <th>Nombre</th>
                         <th>Descripcion</th>
                         <th>Accion</th>
@@ -107,24 +100,21 @@
                     <tbody>
                     <c:forEach var="categoria" items="${categorias}">
                       <tr>
-                        <td>${categoria.codigo}</td>
 		                <td>${categoria.nombre}</td>
 		                <td>${categoria.descripcion}</td>
-		                
-		               
-                        
+
                          <td>
-									<a href="${contextPath}/actualizarCategoria?id=${categoria.codigo}">
-		                          		<button type="button" class="btn btn-success">
-		                          			<i class="fa fa-pencil"></i>&nbsp;
-		                          		</button>
-		                         	</a>
-		                         	<a href="${contextPath}/eliminarCategoria?id=${categoria.codigo}">
-		                         		<button type="button" class="btn btn-danger">
-		                         			<i class="fa fa-trash-o"></i>&nbsp;
-		                         		</button>
-									</a>
-		                        </td>
+								<a href="${contextPath}/actualizarCategoria?id=${categoria.codigo}">
+		                          	<button type="button" class="btn btn-success">
+		                          		<i class="fa fa-pencil"></i>&nbsp;
+		                        	</button>
+		                        </a>
+	                         	<a href="${contextPath}/eliminarCategoria?id=${categoria.codigo}">
+	                         		<button type="button" class="btn btn-danger">
+									<i class="fa fa-trash-o"></i>&nbsp;
+	                         		</button>
+								</a>
+                        </td>
 
                         
                       </tr>

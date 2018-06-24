@@ -137,4 +137,32 @@ public class CategoriaDao {
     }
 
 
+    public String editarCategoria(Categoria categoria) {
+
+      // Agrego los datos del registro (nombreColumna/Valor)
+
+      MapSqlParameterSource map = new MapSqlParameterSource();
+      map.addValue("codigo", categoria.getCodigo());
+      map.addValue("nombre", categoria.getNombre());
+      map.addValue("descripcion", categoria.getDescripcion());
+
+      // Armar la sentencia de actualización debase de datos
+      String query =
+          "UPDATE categoria SET nombre = :nombre, descripcion = :descripcion WHERE codigo = :codigo";
+
+      // Ejecutar la sentencia
+      int result = 0;
+      try {
+        result = springDbMgr.executeDml(query, map);
+      } catch (Exception e) {
+        new Exception();
+      }
+      // Si hubieron filas afectadas es por que si hubo registro, en caso contrario muestra el mensaje
+      // de error.
+      return (result == 1) ? "Actualizacion exitosa"
+          : "La categoria no puede ser actualizada. Contacte al administrador.";
+    }
+
+
+    
 }

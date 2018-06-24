@@ -75,8 +75,40 @@ public class CategoriaController {
       return eliminarCategoria(categoria.getCodigo(), model);
       
     }
-
   }
+  
+  @GetMapping(value = "/actualizarCategoria")
+  public String actualizarCategoria(@RequestParam("id") long idCategoria, Model model) {
+    // Consulto que el Id sea mayor a 0.
+    if (idCategoria <= 0) {
+      return index(model);
+    }
+    Categoria categoria = categoriaDao.obtenerCategoriaPorId(idCategoria);
+    model.addAttribute("categoria", categoria);
+    return "Administrador/Categoria/ActualizarCategoria"; // Nombre del archivo jsp
+  }
+
+  @PostMapping(value = "/editarCategoria")
+  public String editarCategoria(@ModelAttribute("categoria") Categoria categoria, Model model) {
+
+    // Consulta si tiene todos los campos llenos
+    if (categoria.validarDatos()) {
+      String mensaje = categoriaDao.editarCategoria(categoria);
+      if (mensaje.equals("Actualizacion exitosa")) {
+        model.addAttribute("result", "Categoria actualizada con éxito.");
+        return index(model);
+      } else {
+        model.addAttribute("wrong", mensaje);
+        return "Administrador/Categoria/ActualizarCategoria";
+      }
+      //
+    } else {
+      model.addAttribute("wrong", "Debes llenar todos los campos.");
+      return "Administrador/Categoria/ActualizarCategoria";
+    }
+  }
+  
+  
 }
 
 
