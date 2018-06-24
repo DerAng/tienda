@@ -1,5 +1,7 @@
 package co.ufps.edu.controller;
 
+import java.util.HashMap;
+import java.util.Map;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,11 +28,20 @@ public class ClienteController {
 	@GetMapping("clientes") // Base
 	public String index(Model model) {
 		model.addAttribute("clientes", clienteDao.getClientes());
+		model.addAttribute("tipodocumentos", getTipoDeDocumentos());
 		return "/Administrador/Cliente/Clientes"; // Nombre del archivo jsp
 	}
 	
 
-	@ModelAttribute("cliente")
+	private Map<String, String> getTipoDeDocumentos() {
+	    Map<String, String> formas = new HashMap<>();
+	    formas.put("Cedula de ciudadania", "Cedula de ciudadania");
+	    formas.put("Cedula de extranjeria", "Cedula de extranjeria");
+	    formas.put("Tajerta de identidad", "Tajerta de identidad");
+	    return formas;
+  }
+
+  @ModelAttribute("cliente")
 	public Cliente setUpUserForm() {		
 		return new Cliente();
 	}

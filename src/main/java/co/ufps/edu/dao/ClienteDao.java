@@ -15,9 +15,7 @@ import co.ufps.edu.dto.Vendedor;
 public class ClienteDao {
 	
 	private SpringDbMgr springDbMgr;
-	
 
-	
 	public ClienteDao(){
 		springDbMgr = new SpringDbMgr();
 	}

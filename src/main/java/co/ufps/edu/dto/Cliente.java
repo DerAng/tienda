@@ -12,27 +12,6 @@ public class Cliente {
 	private String direccion;
 	private String telefono;
 	private String correoElectronico;
-	
-	
-	public Cliente(){
-		
-	}
-	
-	
-	
-	public Cliente(int codigo,String tipoDoc, int numeroDocumento, String nombre, String apellido, String direccion,
-			String telefono, String correoElectronico) {
-		super();
-		this.tipoDoc = tipoDoc;
-		this.numeroDocumento = numeroDocumento;
-		this.nombre = nombre;
-		this.apellido = apellido;
-		this.direccion = direccion;
-		this.telefono = telefono;
-		this.correoElectronico = correoElectronico;
-		this.codigo=codigo;
-	}
-	
 
 	public int getCodigo() {
 		return codigo;
