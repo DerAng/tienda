@@ -8,6 +8,7 @@ import org.springframework.jdbc.support.rowset.SqlRowSet;
 
 import co.ufps.edu.bd.SpringDbMgr;
 import co.ufps.edu.dto.Cliente;
+import co.ufps.edu.dto.Tienda;
 import co.ufps.edu.dto.Vendedor;
 
 
@@ -81,6 +82,53 @@ public class ClienteDao {
 		    // de error.
 		    return (result == 1) ? "Registro exitoso"
 		        : "El cliente no pudo ser registrado. Contacte al administrador";
+		  }
+	 
+	 
+	 
+	 
+	 public Cliente obtenerClientePorCodigo(long codigoCliente) {
+		 // Lista para retornar con los datos
+		    Cliente cliente = new Cliente();
+
+		    // Consulta para realizar en base de datos
+		    MapSqlParameterSource map = new MapSqlParameterSource();
+		    map.addValue("codigo", codigoCliente);
+		    SqlRowSet sqlRowSet = springDbMgr.executeQuery(" SELECT * FROM cliente WHERE codigo= :codigo", map);
+
+		    // Consulto si el cliente existe
+		    if (sqlRowSet.next()) {
+		      // Almaceno los datos de la tienda
+		      cliente.setCodigo(sqlRowSet.getInt("codigo"));
+		      cliente.setNombre(sqlRowSet.getString("nombre"));
+		     
+		    }
+
+		    // Retorna la tienda desde base de datos
+		    return cliente;
+		  }
+
+
+		  public String eliminarCliente(Cliente cliente) {
+
+		    // Agrego los datos de la eliminación (nombreColumna/Valor)
+		    MapSqlParameterSource map = new MapSqlParameterSource();
+		    map.addValue("codigo", cliente.getCodigo());
+
+		    // Armar la sentencia de actualización debase de datos
+		    String query = "DELETE FROM cliente WHERE codigo = :codigo";
+
+		    // Ejecutar la sentencia
+		    int result = 0;
+		    try {
+		      result = springDbMgr.executeDml(query, map);
+		    } catch (Exception e) {
+		      new Exception();
+		    }
+		    // Si hubieron filas afectadas es por que si hubo registro, en caso contrario muestra el mensaje
+		    // de error.
+		    return (result == 1) ? "Eliminacion exitosa"
+		        : "El Cliente no puede ser eliminado. Contacte al administrador.";
 		  }
 
 }
