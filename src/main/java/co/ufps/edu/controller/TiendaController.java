@@ -12,6 +12,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.fasterxml.jackson.databind.ext.NioPathDeserializer;
 import co.ufps.edu.dao.AdministradorDao;
 import co.ufps.edu.dao.TiendaDao;
+import co.ufps.edu.dto.Categoria;
 import co.ufps.edu.dto.Tienda;
 
 @Controller
@@ -38,7 +39,7 @@ public class TiendaController {
 	}
 	
 	@PostMapping("/guardarTienda")
-	public String RegistrarEvaluador(@ModelAttribute("tienda") Tienda tienda, Model model) {
+	public String RegistrarTienda(@ModelAttribute("tienda") Tienda tienda, Model model) {
 		if (tienda.validarDatos()) {
 			String mensaje = tiendaDao.registrarTienda(tienda);
 			if(mensaje.equals("Registro exitoso")) {
@@ -55,6 +56,34 @@ public class TiendaController {
 		}
 
 	}
+	
+	
+	 @GetMapping(value = "/eliminarTienda")
+	  public String eliminarTienda(@RequestParam("codigo") long codigoTienda, Model model) {
+	    // Consulto que el Id sea mayor a 0.
+	    if (codigoTienda <= 0) {
+	      return index(model);
+	    }
+	    Tienda tienda = tiendaDao.obtenerTiendaPorCodigo(codigoTienda);
+	    model.addAttribute("tienda", tienda);
+	    return "Administrador/Tienda/EliminarTienda"; // Nombre del archivo jsp
+	  }
+
+
+	  @PostMapping(value = "/borrarTienda")
+	  public String borrarCategoria(@ModelAttribute("tienda") Tienda tienda, Model model) {
+
+	    String mensaje = tiendaDao.eliminarTienda(tienda);
+	    if (mensaje.equals("Eliminacion exitosa")) {
+	      model.addAttribute("result", "Tienda eliminada con éxito.");
+	      return index(model);
+	    } else {
+	      model.addAttribute("wrong", mensaje);
+	      return eliminarTienda(tienda.getCodigo(), model);
+	      
+	    }
+
+	  }
 	
 
 }

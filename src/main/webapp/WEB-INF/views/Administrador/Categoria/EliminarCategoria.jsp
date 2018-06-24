@@ -97,7 +97,7 @@
 
     </div><!-- /#right-panel -->
 
-<%@ include file="RegistrarCategoria.jsp" %>
+
     
  
 <%@ include file="../General/Scripts.jsp"%>

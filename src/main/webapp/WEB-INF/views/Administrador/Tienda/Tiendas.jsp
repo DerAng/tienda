@@ -103,12 +103,12 @@
 		                        
 		                        
 		                        <td>
-									<a href="${contextPath}/actualizarTienda?id=${tienda.codigo}">
+									<a href="${contextPath}/actualizarTienda?codigo=${tienda.codigo}">
 		                          		<button type="button" class="btn btn-success">
 		                          			<i class="fa fa-pencil"></i>&nbsp;
 		                          		</button>
 		                         	</a>
-		                         	<a href="${contextPath}/actualizarTienda?id=${tienda.codigo}">
+		                         	<a href="${contextPath}/eliminarTienda?codigo=${tienda.codigo}">
 		                         		<button type="button" class="btn btn-danger">
 		                         			<i class="fa fa-trash-o"></i>&nbsp;
 		                         		</button>
