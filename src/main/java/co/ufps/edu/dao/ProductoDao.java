@@ -1,7 +1,10 @@
 package co.ufps.edu.dao;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 import co.ufps.edu.bd.SpringDbMgr;
@@ -61,6 +64,23 @@ public class ProductoDao {
       
       return productos;
   }
+  
+  public Map<Integer,String> getListaProductos() {
+    Map<Integer,String> productos = new HashMap<>();
+
+    SqlRowSet sqlRowSet = springDbMgr.executeQuery(   "select      producto.codigo               codigo, "
+                                                    + "            producto.nombre               nombre,"
+                                                    + "            producto.precioVenta          precio "
+                                                    + "from        producto "
+                                                    + "ORDER BY    producto.codigo desc");
+
+    while (sqlRowSet.next()) {
+      productos.put(sqlRowSet.getInt("codigo"), sqlRowSet.getString("nombre"));
+    }
+
+    return productos;
+  }
+  
   
   public String registrarProducto(Producto producto) {
     // Agrego los datos del registro (nombreColumna/Valor)
@@ -175,5 +195,27 @@ public class ProductoDao {
 
   }
 
+  public Object getListPrecioProductos() {
+    Map<Integer,Integer> productos = new HashMap<>();
+
+    SqlRowSet sqlRowSet = springDbMgr.executeQuery(   "select      producto.codigo               codigo, "
+                                                    + "            producto.nombre               nombre,"
+                                                    + "            producto.precioVenta          precio "
+                                                    + "from        producto "
+                                                    + "ORDER BY    producto.codigo desc");
+
+    
+    while (sqlRowSet.next()) {
+      
+      productos.put(sqlRowSet.getInt("codigo"), sqlRowSet.getInt("precio"));
+    }
+
+    return productos;
+  }
+
+  public static void main(String[] args) {
+    ProductoDao p = new ProductoDao();
+    System.out.println(p.getListPrecioProductos());
+  }
   
 }
