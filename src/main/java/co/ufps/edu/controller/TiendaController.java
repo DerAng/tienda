@@ -70,7 +70,7 @@ public class TiendaController {
 
 
   @PostMapping(value = "/borrarTienda")
-  public String borrarCategoria(@ModelAttribute("tienda") Tienda tienda, Model model) {
+  public String borrarTienda(@ModelAttribute("tienda") Tienda tienda, Model model) {
 
     String mensaje = tiendaDao.eliminarTienda(tienda);
     if (mensaje.equals("Eliminacion exitosa")) {
@@ -85,12 +85,12 @@ public class TiendaController {
   }
   
   @GetMapping(value = "/actualizarTienda")
-  public String actualizarCategoria(@RequestParam("codigo") long codigoCategoria, Model model) {
+  public String actualizarTienda(@RequestParam("codigo") long codigoTienda, Model model) {
     // Consulto que el Id sea mayor a 0.
-    if (codigoCategoria <= 0) {
+    if (codigoTienda <= 0) {
       return index(model);
     }
-    Tienda tienda = tiendaDao.obtenerTiendaPorCodigo(codigoCategoria);
+    Tienda tienda = tiendaDao.obtenerTiendaPorCodigo(codigoTienda);
     model.addAttribute("tienda", tienda);
     model.addAttribute("administradores", administradorDao.getlistaAdministradores());
     return "Administrador/Tienda/ActualizarTienda"; // Nombre del archivo jsp

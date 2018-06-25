@@ -122,13 +122,37 @@ public class ProductoDao {
     // Consulta para realizar en base de datos
     MapSqlParameterSource map = new MapSqlParameterSource();
     map.addValue("codigo", idProducto);
-    SqlRowSet sqlRowSet = springDbMgr.executeQuery(" SELECT * FROM producto WHERE codigo = :codigo", map);
+    SqlRowSet sqlRowSet = springDbMgr.executeQuery("select      producto.codigo             codigoProducto, "
+            + "            producto.nombre             nombre,"
+            + "            producto.stock              stock,"
+            + "            producto.precioVenta        precio,"
+            + "            producto.costo              costo,"
+            + "            producto.fechaVencimiento   fechaVencimiento,"
+            + "            proveedor.nomEmpresa     nombreProveedor,"
+            + "            proveedor.codigo            codigoProveedor, "
+          
+            + "            categoria.codigo            codigoCategoria,"
+            + "            categoria.nombre            categoriaNombre "
+            
+            + "from        producto "
+            + "inner join  productoproveedor ON productoproveedor.idProducto = producto.codigo "
+            + "inner join  proveedor         ON proveedor.codigo = productoproveedor.idProveedor "
+            + "inner join  categoria         ON categoria.codigo = producto.categoria "
+            + "where producto.codigo = :codigo "
+            + "ORDER BY    producto.codigo desc", map);
 
     // Consulto si la categoria existe
     if (sqlRowSet.next()) {
       // Almaceno los datos de la categoria
       producto.setCodigo(sqlRowSet.getInt("codigo"));
+      producto.setProveedor(sqlRowSet.getInt("codigoProveedor"));
       producto.setNombre(sqlRowSet.getString("nombre"));
+      producto.setCategoria(sqlRowSet.getInt("codigoCategoria"));
+      producto.setStock(sqlRowSet.getInt("stock"));
+      producto.setPrecioVenta(sqlRowSet.getInt("precio"));
+      producto.setCosto(sqlRowSet.getInt("costo"));
+      producto.setFechaVencimiento(sqlRowSet.getDate("fechaVencimiento"));
+      
     }
 
     // Retorna la categoria desde base de datos
@@ -174,6 +198,41 @@ public class ProductoDao {
     }
 
   }
+  
+  
+  public String editarProducto(Producto producto) {
+	    // Agrego los datos del registro (nombreColumna/Valor)
+
+	    MapSqlParameterSource map = new MapSqlParameterSource();
+	    map.addValue("codigo", producto.getCodigo());
+	    map.addValue("nombre", producto.getNombre());
+	    map.addValue("categoria", producto.getCategoria());
+	    map.addValue("stock", producto.getStock());
+	    map.addValue("precioVenta", producto.getPrecioVenta());
+	    map.addValue("costo", producto.getCosto());
+	    map.addValue("fechaVencimiento", producto.getFechaVencimiento());
+	
+	    
+
+	    // Armar la sentencia de actualización debase de datos
+	    String query =
+	        "UPDATE producto SET nombre = :nombre, categoria = :categoria , stock = :stock, precioVenta = :precioVenta, costo = :costo, fechaVencimiento = :fechaVencimiento where codigo = :codigo ";
+
+	    // Ejecutar la sentencia
+	    int result = 0;
+	    try {
+	      result = springDbMgr.executeDml(query, map);
+	    } catch (Exception e) {
+	      e.printStackTrace();
+	    }
+	    // Si hubieron filas afectadas es por que si hubo registro, en caso contrario muestra el mensaje
+	    // de error.
+	    return (result == 1) ? "Actualizacion exitosa"
+	        : "El producto no pudo ser actualizado. Contacte al administrador";
+	    // Si hubieron filas afectadas es por que si hubo registro, en caso contrario muestra el mensaje
+	    // de error.
+
+	  }
 
   
 }

@@ -100,7 +100,7 @@
 			                        
 			                        
 			                        <td>
-										<a href="${contextPath}/actualizarTienda?id=${vendedor.codigo}">
+										<a href="${contextPath}/actualizarVendedor?codigo=${vendedor.codigo}">
 			                          		<button type="button" class="btn btn-success">
 			                          			<i class="fa fa-pencil"></i>&nbsp;
 			                          		</button>

@@ -118,7 +118,7 @@
                          <td>${cliente.direccion}</td>
                       
                           <td>
-									<a href="${contextPath}/actualizarCategoria?id=${cliente.codigo}">
+									<a href="${contextPath}/actualizarCliente?codigo=${cliente.codigo}">
 		                          		<button type="button" class="btn btn-success">
 		                          			<i class="fa fa-pencil"></i>&nbsp;
 		                          		</button>

@@ -17,8 +17,8 @@
                     <i class="fa fa-bars"></i>
                 </button>
                
-                <a class="navbar-brand" href="${contextPath}/admin"><img src="resources/images/logo.png" alt="Logo"></a>
-                
+               <!-- <a class="navbar-brand" href="${contextPath}/admin"><img src="resources/images/logo.png" alt="Logo"></a> !-->
+               <h1  style="color:white;"> SGV </h1>
 
             </div>
 
@@ -66,7 +66,13 @@
                         <a href="${contextPath}/categorias"> <i class="menu-icon fa fa-bars"></i>Gestionar Categorias</a>
                     </li>
 
-
+                      
+                      
+                      
+                    <li>
+                        <a href="${contextPath}/ayuda"> <i class="menu-icon fa fa-graduation-cap""></i>Mesa De Ayuda</a>
+                    </li>
+                      
                      
             
                 </ul>

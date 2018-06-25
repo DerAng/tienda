@@ -24,6 +24,7 @@
     <div class="sufee-login d-flex align-content-center flex-wrap">
         <div class="container">
             <div class="login-content">
+            
 	            <c:if test="${not empty wrong}">
 	                  <div class="alert alert-warning alert-dismissable">
 	                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
@@ -39,12 +40,20 @@
 
                      <div class="login-logo">
                         <a href="index.html">
-                        <!--
-                             <img class="align-content" src="resources/images/img1.jpg" alt="">  
-                        -->
+                       
+                             <img class="align-content" src="resources/images/imagen.png" alt="">
+                             <br/>
+                             <br/>
+                              <br/>
+                             <img class="align-content" src="resources/images/icon.png" alt="">
+                             
+                               
+                             
                         </a>
                        
                      </div>
+                     
+                     <br/>
 
                       <div class="form-group">
                             <div class="input-group">

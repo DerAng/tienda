@@ -8,6 +8,7 @@ import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 import co.ufps.edu.bd.SpringDbMgr;
 import co.ufps.edu.dto.Proveedor;
+import co.ufps.edu.dto.Tienda;
 
 public class ProveedorDao {
 	private SpringDbMgr springDbMgr;
@@ -110,6 +111,11 @@ public class ProveedorDao {
         // Almaceno los datos de la categoria
         proveedor.setCodigo(sqlRowSet.getInt("codigo"));
         proveedor.setNomEmpresa(sqlRowSet.getString("nomEmpresa"));
+        proveedor.setNombreContacto("nombreContacto");
+        proveedor.setTelefono(sqlRowSet.getString("telefono"));
+        proveedor.setCorreoElectronico(sqlRowSet.getString("correoElectronico"));
+        proveedor.setFormaPago(sqlRowSet.getString("formaPago"));
+        proveedor.setNit_Empresa(sqlRowSet.getInt("nit_Empresa"));		
       }
 
       // Retorna la categoria desde base de datos
@@ -138,5 +144,40 @@ public class ProveedorDao {
       return (result == 1) ? "Eliminacion exitosa"
           : "El proveedor no puede ser eliminado. Contacte al administrador.";
     }
+    
+    
+    
+    public String editarProveedor(Proveedor proveedor) {
+        // Agrego los datos del registro (nombreColumna/Valor)
+
+        MapSqlParameterSource map = new MapSqlParameterSource();
+        map.addValue("codigo", proveedor.getCodigo());
+        map.addValue("nit_Empresa", proveedor.getNit_Empresa());
+	    map.addValue("nomEmpresa", proveedor.getNomEmpresa());
+	    map.addValue("nombreContacto", proveedor.getNombreContacto());
+	    map.addValue("telefono", proveedor.getTelefono());
+	    map.addValue("correoElectronico", proveedor.getCorreoElectronico());
+	    map.addValue("formaPago", proveedor.getFormaPago());
+        
+        
+        // Armar la sentencia de actualización debase de datos
+        String query =
+            "UPDATE proveedor SET nit_Empresa = :nit_Empresa, nomEmpresa = :nomEmpresa , nombreContacto = :nombreContacto, telefono = :telefono, correoElectronico = :correoElectronico, formaPago = :formaPago  where codigo = :codigo ";
+
+        // Ejecutar la sentencia
+        int result = 0;
+        try {
+          result = springDbMgr.executeDml(query, map);
+        } catch (Exception e) {
+          e.printStackTrace();
+        }
+        // Si hubieron filas afectadas es por que si hubo registro, en caso contrario muestra el mensaje
+        // de error.
+        return (result == 1) ? "Actualizacion exitosa"
+            : "El proveedor no pudo ser actualizado. Contacte al administrador";
+        // Si hubieron filas afectadas es por que si hubo registro, en caso contrario muestra el mensaje
+        // de error.
+
+      }
 
 }

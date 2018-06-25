@@ -40,7 +40,7 @@
                 <div class="col-md-12">
                     <div class="card">
                         <div class="card-header">
-                            <strong class="card-title">Actualizar categoría</strong>
+                            <strong class="card-title">Actualizar Tienda</strong>
                         </div>
 
                     	<div class="card-body">

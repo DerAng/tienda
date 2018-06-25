@@ -90,5 +90,40 @@ public class ProveedorController {
       return eliminarProveedor(proveedor.getCodigo(), model);
     }
   }
+  
+  
+  
+  @GetMapping(value = "/actualizarProveedor")
+  public String actualizarProveedor(@RequestParam("codigo") long codigoProveedor, Model model) {
+    // Consulto que el Id sea mayor a 0.
+    if (codigoProveedor <= 0) {
+      return index(model);
+    }
+   Proveedor proveedor = proveedorDao.obtenerProveedorPorId(codigoProveedor);
+    model.addAttribute("proveedor", proveedor);
+    model.addAttribute("formas", getFormas());
+    return "Administrador/Proveedor/ActualizarProveedor"; // Nombre del archivo jsp
+  }
+
+  @PostMapping(value = "/editarProveedor")
+  public String editarTienda(@ModelAttribute("proveedor") Proveedor proveedor, Model model) {
+
+    // Consulta si tiene todos los campos llenos
+    if (proveedor.validarDatos()) {
+      String mensaje = proveedorDao.editarProveedor(proveedor);
+      if (mensaje.equals("Actualizacion exitosa")) {
+        model.addAttribute("result", "Proveedor actualizado con éxito.");
+        return index(model);
+      } else {
+        model.addAttribute("wrong", mensaje);
+        model.addAttribute("formas", getFormas());
+        return "Administrador/Proveedor/ActualizarProveedor"; // Nombre del archivo jsp
+      }
+      //
+    } else {
+      model.addAttribute("wrong", "Debes llenar todos los campos.");
+      return "Administrador/Proveedor/ActualizarProveedor"; // Nombre del archivo jsp
+    }
+  }
 
 }

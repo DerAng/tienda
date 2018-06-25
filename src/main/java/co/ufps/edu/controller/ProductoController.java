@@ -58,7 +58,7 @@ public class ProductoController {
   }
   
   @GetMapping(value = "/eliminarProducto")
-  public String eliminarCategoria(@RequestParam("id") long idProducto, Model model) {
+  public String eliminarCategoria(@RequestParam("codigo") long idProducto, Model model) {
     // Consulto que el Id sea mayor a 0.
     if (idProducto <= 0) {
       return index(model);
@@ -83,6 +83,42 @@ public class ProductoController {
       
     }
 
+  }
+  
+  
+  
+  @GetMapping(value = "/actualizarProducto")
+  public String actualizarProducto(@RequestParam("codigo") long codigoProducto, Model model) {
+    // Consulto que el Id sea mayor a 0.
+    if (codigoProducto <= 0) {
+      return index(model);
+    }
+    Producto producto = productoDao.obtenerProductoPorId(codigoProducto);
+    model.addAttribute("producto", producto);
+    model.addAttribute("proveedores", proveedorDao.getlistaProveedores());
+    model.addAttribute("categorias", categoriaDao.getListaCategorias());
+    
+    return "Administrador/Producto/ActualizarProducto"; // Nombre del archivo jsp
+  }
+
+  @PostMapping(value = "/editarProducto")
+  public String editarProducto(@ModelAttribute("producto") Producto producto, Model model) {
+
+    // Consulta si tiene todos los campos llenos
+    if (producto.validarDatos()) {
+      String mensaje = productoDao.editarProducto(producto);
+      if (mensaje.equals("Actualizacion exitosa")) {
+        model.addAttribute("result", "Producto actualizado con éxito.");
+        return index(model);
+      } else {
+        model.addAttribute("wrong", mensaje);
+        return "Administrador/Producto/ActualizarProducto"; // Nombre del archivo jsp
+      }
+      //
+    } else {
+      model.addAttribute("wrong", "Debes llenar todos los campos.");
+      return "Administrador/Producto/ActualizarProducto"; // Nombre del archivo jsp
+    }
   }
 
 }

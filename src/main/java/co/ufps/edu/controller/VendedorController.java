@@ -89,9 +89,38 @@ public class VendedorController {
     }
 
   }
-
-
   
+  
+  @GetMapping(value = "/actualizarVendedor")
+  public String actualizarVendedor(@RequestParam("codigo") long codigoVendedor, Model model) {
+    // Consulto que el Id sea mayor a 0.
+    if (codigoVendedor<= 0) {
+      return index(model);
+    }
+    Vendedor vendedor = vendedorDao.obtenerVendedorPorCodigo(codigoVendedor);
+    model.addAttribute("vendedor", vendedor);
+    model.addAttribute("tiendas", tiendaDao.getListaTiendas());
+    return "Administrador/Vendedor/ActualizarVendedor"; // Nombre del archivo jsp
+  }
 
+  @PostMapping(value = "/editarVendedor")
+  public String editarVendedor(@ModelAttribute("vendedor") Vendedor vendedor, Model model) {
+
+    // Consulta si tiene todos los campos llenos
+    if (vendedor.validarDatos()) {
+      String mensaje = vendedorDao.editarVendedor(vendedor);
+      if (mensaje.equals("Actualizacion exitosa")) {
+        model.addAttribute("result", "Vendedor actualizado con éxito.");
+        return index(model);
+      } else {
+        model.addAttribute("wrong", mensaje);
+        return "Administrador/Vendedor/ActualizarVendedor"; // Nombre del archivo jsp
+      }
+      //
+    } else {
+      model.addAttribute("wrong", "Debes llenar todos los campos.");
+      return "Administrador/Vendedor/ActualizarVendedor"; // Nombre del archivo jsp
+    }
+  }
 
 }

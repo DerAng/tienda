@@ -99,7 +99,7 @@
 		                        <td>${proveedor.telefono}</td>
 		                        <td>${proveedor.correoElectronico}</td>
 		                        <td>
-									<a href="${contextPath}/actualizarProveedor?id=${proveedor.codigo}">
+									<a href="${contextPath}/actualizarProveedor?codigo=${proveedor.codigo}">
 		                          		<button type="button" class="btn btn-success">
 		                          			<i class="fa fa-pencil"></i>&nbsp;
 		                          		</button>

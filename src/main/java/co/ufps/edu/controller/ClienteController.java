@@ -28,6 +28,7 @@ public class ClienteController {
 	@GetMapping("clientes") // Base
 	public String index(Model model) {
 		model.addAttribute("clientes", clienteDao.getClientes());
+		
 		model.addAttribute("tipodocumentos", getTipoDeDocumentos());
 		return "/Administrador/Cliente/Clientes"; // Nombre del archivo jsp
 	}
@@ -86,6 +87,39 @@ public class ClienteController {
 	    } else {
 	      model.addAttribute("wrong", mensaje);
 	      return eliminarCliente(cliente.getCodigo(), model);	      
+	    }
+	  }
+	  
+	  
+	  @GetMapping(value = "/actualizarCliente")
+	  public String actualizarCliente(@RequestParam("codigo") long codigoCliente, Model model) {
+	    // Consulto que el Id sea mayor a 0.
+	    if (codigoCliente <= 0) {
+	      return index(model);
+	    }
+	    Cliente cliente = clienteDao.obtenerClientePorCodigo(codigoCliente);
+	    model.addAttribute("cliente",cliente);
+	    model.addAttribute("tipodocumentos", getTipoDeDocumentos());
+	    return "Administrador/Cliente/ActualizarCliente"; // Nombre del archivo jsp
+	  }
+
+	  @PostMapping(value = "/editarCliente")
+	  public String editarCliente(@ModelAttribute("cliente") Cliente cliente, Model model) {
+
+	    // Consulta si tiene todos los campos llenos
+	    if (cliente.validarDatos()) {
+	      String mensaje = clienteDao.editarCliente(cliente);
+	      if (mensaje.equals("Actualizacion exitosa")) {
+	        model.addAttribute("result", "Cliente actualizado con éxito.");
+	        return index(model);
+	      } else {
+	        model.addAttribute("wrong", mensaje);
+	        return "Administrador/Cliente/ActualizarCliente"; // Nombre del archivo jsp
+	      }
+	      //
+	    } else {
+	      model.addAttribute("wrong", "Debes llenar todos los campos.");
+	      return "Administrador/Cliente/ActualizarCliente"; // Nombre del archivo jsp
 	    }
 	  }
 }

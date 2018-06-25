@@ -42,31 +42,23 @@
 
 
 
+        
         <div class="content mt-3">
 
            
 
-           <div class="col-sm-6 col-lg-3">
+           <div class="col-sm-6 col-lg-4">
                 <div class="card text-white bg-flat-color-1">
                     <div class="card-body pb-0">
-                        <div class="dropdown float-right">
-                            <button class="btn bg-transparent dropdown-toggle theme-toggle text-light" type="button" id="dropdownMenuButton" data-toggle="dropdown">
-                                <i class="fa fa-cog"></i>
-                            </button>
-                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                <div class="dropdown-menu-content">
-                                    <a class="dropdown-item" href="#">Action</a>
-                                    <a class="dropdown-item" href="#">Another action</a>
-                                    <a class="dropdown-item" href="#">Something else here</a>
-                                </div>
-                            </div>
-                        </div>
+                    
+                       
+                        
                         <h4 class="mb-0">
-                            <span class="count">10468</span>
+                            <span class="count">100</span>
                         </h4>
-                        <p class="text-light">Members online</p>
+                        <p class="text-light">CANTIDAD DE VENTAS POR AÑO</p>
 
-                        <div class="chart-wrapper px-0" style="height:70px;" height="70">
+                        <div class="chart-wrapper px-0" style="height:100px;" height="100">
                             <canvas id="widgetChart1"></canvas>
                         </div>
 
@@ -77,27 +69,19 @@
             <!--/.col-->
 
 
-            <div class="col-sm-6 col-lg-3">
+
+
+
+            <div class="col-sm-6 col-lg-4">
                 <div class="card text-white bg-flat-color-2">
                     <div class="card-body pb-0">
-                        <div class="dropdown float-right">
-                            <button class="btn bg-transparent dropdown-toggle theme-toggle text-light" type="button" id="dropdownMenuButton" data-toggle="dropdown">
-                                <i class="fa fa-cog"></i>
-                            </button>
-                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                <div class="dropdown-menu-content">
-                                    <a class="dropdown-item" href="#">Action</a>
-                                    <a class="dropdown-item" href="#">Another action</a>
-                                    <a class="dropdown-item" href="#">Something else here</a>
-                                </div>
-                            </div>
-                        </div>
+                    
                         <h4 class="mb-0">
                             <span class="count">10468</span>
                         </h4>
-                        <p class="text-light">Members online</p>
+                        <p class="text-light">CANTIDAD DE CLIENTES POR AÑO</p>
 
-                        <div class="chart-wrapper px-0" style="height:70px;" height="70">
+                        <div class="chart-wrapper px-0" style="height:100px;" height="100">
                             <canvas id="widgetChart2"></canvas>
                         </div>
 
@@ -108,29 +92,19 @@
 
             <!--/.col-->
 
-            <div class="col-sm-6 col-lg-3">
+            <div class="col-sm-6 col-lg-4">
                 <div class="card text-white bg-flat-color-3">
                     <div class="card-body pb-0">
-                        <div class="dropdown float-right">
-                            <button class="btn bg-transparent dropdown-toggle theme-toggle text-light" type="button" id="dropdownMenuButton" data-toggle="dropdown">
-                                <i class="fa fa-cog"></i>
-                            </button>
-                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                <div class="dropdown-menu-content">
-                                    <a class="dropdown-item" href="#">Action</a>
-                                    <a class="dropdown-item" href="#">Another action</a>
-                                    <a class="dropdown-item" href="#">Something else here</a>
-                                </div>
-                            </div>
-                        </div>
+                    
+                       
                         <h4 class="mb-0">
                             <span class="count">10468</span>
                         </h4>
-                        <p class="text-light">Members online</p>
+                        <p class="text-light">TOTAL VENDIDO POR AÑO</p>
 
                     </div>
 
-                        <div class="chart-wrapper px-0" style="height:70px;" height="70">
+                        <div class="chart-wrapper px-0" style="height:100px;" height="100">
                             <canvas id="widgetChart3"></canvas>
                         </div>
                 </div>
@@ -140,27 +114,17 @@
 
 
 
-            <div class="col-sm-6 col-lg-3">
+            <div class="col-sm-6 col-lg-4">
                 <div class="card text-white bg-flat-color-4">
                     <div class="card-body pb-0">
-                        <div class="dropdown float-right">
-                            <button class="btn bg-transparent dropdown-toggle theme-toggle text-light" type="button" id="dropdownMenuButton" data-toggle="dropdown">
-                                <i class="fa fa-cog"></i>
-                            </button>
-                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                <div class="dropdown-menu-content">
-                                    <a class="dropdown-item" href="#">Action</a>
-                                    <a class="dropdown-item" href="#">Another action</a>
-                                    <a class="dropdown-item" href="#">Something else here</a>
-                                </div>
-                            </div>
-                        </div>
+                    
+                    
                         <h4 class="mb-0">
                             <span class="count">10468</span>
                         </h4>
-                        <p class="text-light">Members online</p>
+                        <p class="text-light"></p>
 
-                        <div class="chart-wrapper px-3" style="height:70px;" height="70">
+                        <div class="chart-wrapper px-3" style="height:100px;" height="100">
                             <canvas id="widgetChart4"></canvas>
                         </div>
 
