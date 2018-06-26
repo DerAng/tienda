@@ -1,7 +1,9 @@
 package co.ufps.edu.dao;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 
@@ -183,4 +185,19 @@ public class VendedorDao {
 	  }
 
 
+  public Map<Integer,String> getListaVendedores() {
+    Map<Integer,String> productos = new HashMap<Integer,String>();
+
+    SqlRowSet sqlRowSet = springDbMgr.executeQuery(   "select      vendedor.codigo                              codigo, "
+                                                    + "            CONCAT(vendedor.nombre,' ',vendedor.apellido ) nombre "
+                                                    + "from        vendedor "
+                                                    + "ORDER BY    vendedor.codigo desc");
+
+    while (sqlRowSet.next()) {
+      productos.put(sqlRowSet.getInt("codigo"), sqlRowSet.getString("nombre"));
+    }
+
+    return productos;
+  }
+  
 }

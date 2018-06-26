@@ -1,11 +1,12 @@
 package co.ufps.edu.dao;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
-
+import java.util.Map;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
-
 import co.ufps.edu.bd.SpringDbMgr;
 import co.ufps.edu.dto.Cliente;
 
@@ -185,5 +186,22 @@ public class ClienteDao {
 			    // de error.
 
 			  }
+
+
+  public Map<Integer,String> getListaClientes() {
+    Map<Integer,String> productos = new HashMap<Integer,String>();
+
+    SqlRowSet sqlRowSet = springDbMgr.executeQuery(   "select      cliente.codigo                               codigo, "
+                                                    + "            CONCAT(cliente.nombre,' ',cliente.apellido ) nombre "
+                                                    + "from        cliente "
+                                                    + "ORDER BY    cliente.codigo desc");
+
+    while (sqlRowSet.next()) {
+      productos.put(sqlRowSet.getInt("codigo"), sqlRowSet.getString("nombre"));
+    }
+
+    return productos;
+  }
+
 
 }
