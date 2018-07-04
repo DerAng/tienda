@@ -120,5 +120,11 @@ public class ProductoController {
       return "Administrador/Producto/ActualizarProducto"; // Nombre del archivo jsp
     }
   }
+  
+  
+  @GetMapping("/descargarProductos")
+  private String generarInforme() {
+    return "xlsView"; // Nombre del archivo jsp
+  }
 
 }
