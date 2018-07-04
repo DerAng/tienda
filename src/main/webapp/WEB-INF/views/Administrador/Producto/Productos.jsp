@@ -61,10 +61,14 @@
                            <div class="row">
                               <div class="col text-right">
                               </br>
-                                  <button type="button" class=" btn btn-primary">IMPORTAR</button>
-                                  <a href ="${contextPath}/descargarProductos"><button type="button" class=" btn btn-sucess">EXPORTAR</button></a>
+                                  <button type="button" class=" btn btn-primary" onclick="cargarArchivo()">IMPORTAR</button>
+
+                                  <a href ="${contextPath}/descargarProductos"><button type="button" class=" btn btn-success">EXPORTAR</button></a>
                                   <button class=" btn btn-secondary" data-toggle="modal" data-target="#largeModal">CREAR NUEVO PRODUCTO</button>
-                               
+                                  <div style="display: none;">
+                                  	<input type="file" id="archivo" name="archivo" onchange="revisarArchivo(this);" accept=".xlsx,.xls">
+                                  </div>       
+                                  <input type="hidden" id="ruta" class="form-control" value = "${contextPath}" />      
                                     
                               </div>
                             </div>
@@ -87,6 +91,12 @@
 				                    	</button>
 				                   </div>
 							    </c:if>
+							    
+							    <!-- Si hubo un error en el registro muestra el mensaje-->
+								<div id="exito">
+                                </div>
+								<div id="error">
+                                </div>
                     
                   <table id="bootstrap-data-table" class="table table-striped table-bordered">
                     <thead>
@@ -117,8 +127,7 @@
 		                         			<i class="fa fa-trash-o"></i>&nbsp;
 		                         		</button>
 									</a>
-		                        </td>
-				                    
+		                        </td>				                    
 		                      </tr>
                      	</c:forEach>                    
                     
@@ -147,6 +156,109 @@
         $(document).ready(function() {
           $('#bootstrap-data-table-export').DataTable();
         } );
+        
+        function cargarArchivo(){
+        	document.getElementById('archivo').click();
+        }
+        
+        
+        /**
+         * Metodo que guarda un archivo en base de datos y luego pinta una imagen colocando
+         * como direccionamiento el codigo del archivo en base de datos para que cuando le den
+         * clic se descargue el archivo.
+         * @param input Archivo.
+         * @returns 
+         */
+        function revisarArchivo(input) {
+      	  // Consulta si cargo algun archivo
+          if (input.files && input.files[0]) {
+              // Obtiene el archivo
+          	var file = input.files[0];    	
+              // Creo la url a consumir
+      		var ruta = document.getElementById("ruta").value;
+
+            var formData = new FormData();
+            formData.append('archivo', file);
+              // Aca guardo el archivo en base de datos y genero un ID
+      		$.ajax({
+      			type : "POST",
+      			enctype: 'multipart/form-data',
+      		    processData: false,
+      		    contentType: false,
+      		    cache: false,
+      			url : ruta + "/servicios/registrarArchivo",
+      			data: (formData),
+      			success : function(result) {
+      				
+      				if(result.indexOf("ERROR") != -1){
+      					pintarRegistroNoExitoso(result);
+      				}else{
+      					pintarRegistroExitoso();
+      					
+      				}
+      				
+      				console.log("RES --> <"+result+">");
+
+      			},
+      			error : function(e) {
+      				pintarRegistroNoExitoso("Error en el sistema. Contacte al administrador.");
+      				alert("Error! --> "+String(e));
+      				console.log("ERROR: ", e);
+      			}
+      		}); 
+              
+              document.getElementById("archivo").value = "";
+          }
+      }
+        
+        function pintarRegistroExitoso(){
+			var exito = document.getElementById("exito");
+			
+			var div = document.createElement("DIV");
+			div.setAttribute("class","sufee-alert alert with-close alert-success alert-dismissible fade show");
+			var texto = document.createTextNode("Registro exitoso");       
+			div.appendChild(texto);
+			
+			var boton = document.createElement("BUTTON");
+			boton.setAttribute("type","button");
+			boton.setAttribute("class","close");
+			boton.setAttribute("data-dismiss","alert");
+			boton.setAttribute("aria-label","Close");
+			
+			var span = document.createElement("span");
+			span.setAttribute("aria-hidden","true");
+			var textos = document.createTextNode("X");       
+			span.appendChild(textos);
+			
+			boton.appendChild(span);
+			div.appendChild(boton);
+			exito.appendChild(div);
+		}
+		
+		function pintarRegistroNoExitoso(mensaje){
+			var error = document.getElementById("error");
+			
+			var div = document.createElement("DIV");
+			div.setAttribute("class","sufee-alert alert with-close alert-danger alert-dismissible fade show");
+			var texto = document.createTextNode(mensaje);       
+			div.appendChild(texto);
+			
+			var boton = document.createElement("BUTTON");
+			boton.setAttribute("type","button");
+			boton.setAttribute("class","close");
+			boton.setAttribute("data-dismiss","alert");
+			boton.setAttribute("aria-label","Close");
+			
+			var span = document.createElement("span");
+			span.setAttribute("aria-hidden","true");
+			var textos = document.createTextNode("X");       
+			span.appendChild(textos);
+			
+			boton.appendChild(span);
+			div.appendChild(boton);
+			error.appendChild(div);
+		}
+        
     </script>
 
 
