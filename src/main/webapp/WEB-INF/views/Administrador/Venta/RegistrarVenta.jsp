@@ -299,7 +299,16 @@
 								if(result.trim() == 'REGISTRO EXITOSO'){
 									
 									$('#formRealizarVenta').trigger("reset");
-									pintarRegistroExitoso();																	
+								    var table = document.getElementById('bootstrap-data-table');
+								    for (var r = 1, n = table.rows.length; n > 1;) {
+								    	
+								    		document.getElementById("bootstrap-data-table").deleteRow(r);
+								    		n = table.rows.length;
+								    		
+								    		
+								    }
+									pintarRegistroExitoso();	
+									
 									
 								}else{
 									pintarRegistroNoExitoso(result.trim());

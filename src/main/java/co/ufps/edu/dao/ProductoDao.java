@@ -54,6 +54,8 @@ public class ProductoDao {
           producto.setPrecioVenta(sqlRowSet.getInt("precio"));
           producto.setCosto(sqlRowSet.getInt("costo"));
           producto.setFechaVencimiento(sqlRowSet.getDate("fechaVencimiento"));
+          producto.setCategoria(sqlRowSet.getInt("codigoCategoria"));
+          producto.setProveedor(sqlRowSet.getInt("codigoProveedor"));
           producto.setNombreProveedor(sqlRowSet.getString("nombreProveedor"));
           producto.setNombreCategoria(sqlRowSet.getString("categoriaNombre"));
           

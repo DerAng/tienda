@@ -61,8 +61,6 @@
                            <div class="row">
                               <div class="col text-right">
                               </br>
-                                  <button class=" btn btn-primary">IMPORTAR</button>
-                                  <button class="btn btn-success">EXPORTAR</button>
                                   <button class=" btn btn-secondary" data-toggle="modal" data-target="#largeModal">CREAR NUEVO CLIENTE</button>
                                
                                     

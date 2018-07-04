@@ -130,6 +130,14 @@ public class Producto {
           && this.costo > 0);
   }
 
+  @Override
+  public String toString() {
+    return "Producto [proveedor=" + proveedor + ", codigo=" + codigo + ", nombre=" + nombre
+        + ", categoria=" + categoria + ", stock=" + stock + ", precioVenta=" + precioVenta
+        + ", costo=" + costo + ", fechaVencimiento=" + fechaVencimiento + ", nombreProveedor="
+        + nombreProveedor + ", nombreCategoria=" + nombreCategoria + "]";
+  }
+
 
 
 }
