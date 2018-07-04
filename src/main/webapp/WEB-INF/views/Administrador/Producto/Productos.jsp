@@ -61,8 +61,8 @@
                            <div class="row">
                               <div class="col text-right">
                               </br>
-                                  <button class=" btn btn-primary">IMPORTAR</button>
-                                  <button class="btn btn-success">EXPORTAR</button>
+                                  <button type="button" class=" btn btn-primary">IMPORTAR</button>
+                                  <a href ="${contextPath}/descargarProductos"><button type="button" class=" btn btn-sucess">EXPORTAR</button></a>
                                   <button class=" btn btn-secondary" data-toggle="modal" data-target="#largeModal">CREAR NUEVO PRODUCTO</button>
                                
                                     
