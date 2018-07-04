@@ -56,7 +56,7 @@
                         <h4 class="mb-0">
                             <span class="count">100</span>
                         </h4>
-                        <p class="text-light">CANTIDAD DE VENTAS POR AÑO</p>
+                        <p class="text-light">CANTIDAD DE VENTAS POR DIA</p>
 
                         <div class="chart-wrapper px-0" style="height:100px;" height="100">
                             <canvas id="widgetChart1"></canvas>
@@ -77,9 +77,9 @@
                     <div class="card-body pb-0">
                     
                         <h4 class="mb-0">
-                            <span class="count">10468</span>
+                            <span class="count">50</span>
                         </h4>
-                        <p class="text-light">CANTIDAD DE CLIENTES POR AÑO</p>
+                        <p class="text-light">CANTIDAD DE CLIENTES POR DIA</p>
 
                         <div class="chart-wrapper px-0" style="height:100px;" height="100">
                             <canvas id="widgetChart2"></canvas>
@@ -98,9 +98,9 @@
                     
                        
                         <h4 class="mb-0">
-                            <span class="count">10468</span>
+                            <span class="count">500000</span>
                         </h4>
-                        <p class="text-light">TOTAL VENDIDO POR AÑO</p>
+                        <p class="text-light">TOTAL VENDIDO POR DIA</p>
 
                     </div>
 
@@ -120,9 +120,9 @@
                     
                     
                         <h4 class="mb-0">
-                            <span class="count">10468</span>
+                            <span class="count">500</span>
                         </h4>
-                        <p class="text-light"></p>
+                        <p class="text-light">INVENTARIO TOTAL</p>
 
                         <div class="chart-wrapper px-3" style="height:100px;" height="100">
                             <canvas id="widgetChart4"></canvas>
